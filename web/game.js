@@ -1054,6 +1054,16 @@ function selectSongdangOffering(button) {
   setTimeout(() => renderSongdangDialogue("after_offering"), 700);
 }
 
+function skipSongdangMinigame() {
+  state.songdang.offeringIndex = 2;
+  $$('[data-offering-order]').forEach((button) => {
+    button.disabled = true;
+    button.classList.add('is-placed');
+  });
+  $('#songdang-offering-status').textContent = '미니게임을 건너뛰었습니다. 지전물색을 곱게 걸었습니다.';
+  setTimeout(() => renderSongdangDialogue('after_offering'), 180);
+}
+
 function showSongdangPractice(stepId) {
   const step = songdangPracticeSteps[stepId];
   if (!step) return;
@@ -1906,6 +1916,16 @@ function selectHadoObservation(button) {
   hadoCurrentNode.observationResponse = response;
 }
 
+function skipHadoMinigame() {
+  ['flower', 'ground', 'name'].forEach((id) => {
+    state.hado.observations.add(id);
+    $(`[data-hado-observation='${id}']`).classList.add('is-found');
+    $(`[data-hado-record='${id}']`).classList.add('is-found');
+  });
+  $('#hado-game-status').textContent = '미니게임을 건너뛰었습니다. 세 가지 관찰 기록을 모두 찾았습니다. 3 / 3';
+  setTimeout(() => renderHadoDialogue('visitor_alert'), 180);
+}
+
 function showHadoAnswer() {
   hideHadoInteractionLayers();
   setHadoCharacters({ npc: true, visitor: true });
@@ -2173,6 +2193,17 @@ function selectGimnyeongRitual(button){
   const count=state.gimnyeong.ritualAnswers.size; $("#gimnyeong-ritual-status").textContent=`바다의 공동체 기억을 찾았습니다. ${count} / 2`;
   if(count===2) setTimeout(()=>renderGimnyeongDialogue("ritual_complete"),700);
 }
+function skipGimnyeongRitual(){
+  state.gimnyeong.ritualAnswers=new Set(['safety','abundance']);
+  $$('[data-gim-ritual]').forEach((button)=>{
+    const correct=button.dataset.correct==='true';
+    button.disabled=true;
+    button.classList.toggle('is-correct',correct);
+    button.classList.remove('is-wrong');
+  });
+  $('#gimnyeong-ritual-status').textContent='미니게임을 건너뛰었습니다. 공동체의 두 가지 바람을 찾았습니다. 2 / 2';
+  setTimeout(()=>renderGimnyeongDialogue('ritual_complete'),180);
+}
 function showGimnyeongRhythm(){ $("#gimnyeong-dialogue").hidden=true; setGimnyeongCharacters({}); $("#gimnyeong-rhythm-game").hidden=false; $("#gimnyeong-progress-fill").style.width="72%"; startGimRhythm(); }
 function startGimRhythm(){ gimRhythmRunning=true; $(".rhythm-track").classList.add("is-running"); $("#gim-rhythm-status").textContent="빛이 가운데 주황색 매듭에 닿을 때 함께 당기세요."; }
 function pullGimNet(){
@@ -2181,6 +2212,16 @@ function pullGimNet(){
   if(!hit){ state.gimnyeong.rhythmMisses++; $("#gim-rhythm-status").textContent="조금 빨랐거나 늦었어요. 서로의 박자를 보고 다시 맞춰보세요."; return; }
   state.gimnyeong.rhythmRound++; const round=state.gimnyeong.rhythmRound; $("#gim-net-fill").style.width=`${round/3*100}%`; $("#gim-rhythm-count").textContent=`${round} / 3`; $("#gim-rhythm-status").textContent=round<3?`박자가 맞았습니다! ${round} / 3 · 한 번 더 함께 당겨보세요.`:"세 번의 힘이 하나로 모였습니다!";
   if(round>=3){ gimRhythmRunning=false; $(".rhythm-track").classList.remove("is-running"); $("#gim-pull-button").disabled=true; setTimeout(()=>renderGimnyeongDialogue("rhythm_complete"),850); }
+}
+function skipGimnyeongRhythm(){
+  gimRhythmRunning=false;
+  state.gimnyeong.rhythmRound=3;
+  $('.rhythm-track').classList.remove('is-running');
+  $('#gim-net-fill').style.width='100%';
+  $('#gim-rhythm-count').textContent='3 / 3';
+  $('#gim-pull-button').disabled=true;
+  $('#gim-rhythm-status').textContent='미니게임을 건너뛰었습니다. 세 번의 힘이 하나로 모였습니다.';
+  setTimeout(()=>renderGimnyeongDialogue('rhythm_complete'),180);
 }
 function showGimnyeongAnswer(){ $("#gimnyeong-dialogue").hidden=true; setGimnyeongCharacters({}); $("#gimnyeong-answer").hidden=false; $("#gimnyeong-answer-input").focus(); $("#gimnyeong-progress-fill").style.width="88%"; gimnyeongAnswerContinueTarget=null; }
 function setGimAgentStep(name,mode,label){ const el=$(`[data-gim-agent='${name}']`); el.className=mode?`is-${mode}`:""; el.querySelector("small").textContent=label; }
@@ -2506,6 +2547,7 @@ $("#songdang-review-clues").addEventListener("click", showSongdangClueHunt);
 $$('[data-clue]').forEach((button) => button.addEventListener("click", () => inspectSongdangClue(button.dataset.clue)));
 $$('[data-memory-order]').forEach((button) => button.addEventListener("click", () => selectSongdangMemoryCard(button)));
 $$("[data-offering-order]").forEach((button) => button.addEventListener("click", () => selectSongdangOffering(button)));
+$("#songdang-skip-minigame").addEventListener("click", skipSongdangMinigame);
 $("#songdang-complete").addEventListener("click", continueSongdangAfterReward);
 $("#songdang-agent-toggle").addEventListener("click", () => {
   const drawer = $("#songdang-agent-drawer");
@@ -2526,6 +2568,7 @@ $("#hado-translation-toggle").addEventListener("click", toggleHadoTranslation);
 $$('[data-hado-observation]').forEach((button) => {
   button.addEventListener("click", () => selectHadoObservation(button));
 });
+$("#hado-skip-minigame").addEventListener("click", skipHadoMinigame);
 $("#hado-answer-input").addEventListener("input", (event) => {
   $("#hado-char-count").textContent = event.target.value.length;
 });
@@ -2602,7 +2645,9 @@ $("#gimnyeong-next").addEventListener("click", advanceGimnyeong);
 $("#gimnyeong-back").addEventListener("click", goBackGimnyeong);
 $("#gimnyeong-translation-toggle").addEventListener("click", toggleGimnyeongTranslation);
 $$('[data-gim-ritual]').forEach((button) => button.addEventListener("click", () => selectGimnyeongRitual(button)));
+$("#gimnyeong-skip-ritual").addEventListener("click", skipGimnyeongRitual);
 $("#gim-pull-button").addEventListener("click", pullGimNet);
+$("#gimnyeong-skip-rhythm").addEventListener("click", skipGimnyeongRhythm);
 $("#gimnyeong-answer-input").addEventListener("input", (event) => { $("#gimnyeong-char-count").textContent=event.target.value.length; });
 $("#gimnyeong-answer-input").addEventListener("keydown", (event) => {
   if(event.repeat||event.altKey||event.ctrlKey||event.metaKey)return;

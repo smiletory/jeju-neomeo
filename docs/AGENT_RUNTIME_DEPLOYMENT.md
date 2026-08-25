@@ -18,8 +18,8 @@
 - 공개 게임 URL: <https://jeju-neomeo-game-94900819323.us-east1.run.app>
 - Cloud Run 서비스: `jeju-neomeo-game`
 - Cloud Run 리전: `us-east1`
-- 배포 리비전: `jeju-neomeo-game-00001-z8s`
-- 컨테이너: `us-east1-docker.pkg.dev/iceu-688/jeju-neomeo/jeju-neomeo-game:20260826-001`
+- 배포 리비전: `jeju-neomeo-game-00002-47m`
+- 컨테이너: `us-east1-docker.pkg.dev/iceu-688/jeju-neomeo/jeju-neomeo-game:20260826-002`
 - 리소스: 1 vCPU, 2 GiB, 동시성 8, 요청 제한 시간 300초
 - 확장: 최소 인스턴스 0, 최대 인스턴스 3
 - Runtime 리소스 ID: `projects/94900819323/locations/us-east1/reasoningEngines/8767329798025379840`
@@ -71,6 +71,7 @@ AGENT_EXECUTION_BACKEND=local
 - `agents-cli eval run`: 6/6 유효, 오류 0, 응답 품질 평균 5.0/5.0
 - Runtime 직접 호출: 정상 제주어 `pass`, 표준어 `retry_dialect`, 의미 오류 `retry_knowledge`
 - Cloud Run 종단 호출: 문장 의미 → 제주어 표현 → 최종 확인의 스트리밍 순서 및 최종 결과 확인
+- 게임 UI: 하도리 기억 보상 전체 화면 및 세 지점의 미니게임 건너뛰기 경로 확인
 
 릴리스 평가 데이터는 `artifacts/eval_inputs/release_hado_gimnyeong.json`, 결과는 `artifacts/grade_results/release_hado_gimnyeong/`에 보관합니다.
 

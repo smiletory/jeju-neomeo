@@ -26,6 +26,8 @@ await page.evaluate(() => {
 });
 await page.locator("#hado-next").click();
 const gameVisible = await page.locator("#hado-memory-game").isVisible();
+const minigameSkipVisible = await page.locator("#hado-skip-minigame").isVisible();
+if (!minigameSkipVisible) throw new Error("하도리 미니게임 건너뛰기 버튼이 보이지 않습니다.");
 await page.screenshot({ path: "tests/hado-observation-check-1440x900.png", fullPage: true });
 
 for (const id of ["flower", "ground", "name"]) {
@@ -45,11 +47,17 @@ await page.screenshot({ path: "tests/hado-answer-check-1440x900.png", fullPage: 
 await page.locator("#hado-skip-answer").click();
 const visitorReply = await page.locator("#hado-dialogue-text").textContent();
 
+await page.evaluate(() => showHadoReward());
+const rewardBox = await page.locator("#hado-reward").boundingBox();
+if (!rewardBox || rewardBox.y > 1 || rewardBox.height < 899) throw new Error("하도리 기억 보상 화면이 뷰포트를 채우지 못합니다.");
+
 console.log(JSON.stringify({
   detailLabel,
   nextVisibleAtChoice,
   navColumns,
   gameVisible,
+  minigameSkipVisible,
+  rewardBox,
   foundRecords,
   visitorAlert,
   answerVisible,

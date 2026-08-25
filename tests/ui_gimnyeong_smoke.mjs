@@ -17,6 +17,7 @@ if (!(await page.locator("#gimnyeong-screen.is-active").isVisible())) throw new 
 
 await page.evaluate(() => renderGimnyeongDialogue("ritual_request"));
 await page.locator("#gimnyeong-next").click();
+if (!(await page.locator("#gimnyeong-skip-ritual").isVisible())) throw new Error("잠수굿 미니게임 건너뛰기 버튼이 보이지 않습니다.");
 await page.screenshot({ path: `tests/gimnyeong-ritual-layout-${viewport.width}x${viewport.height}.png`, fullPage: true });
 await page.locator('[data-gim-ritual="tourism"]').click();
 const retryText = await page.locator("#gimnyeong-ritual-status").textContent();
@@ -30,6 +31,7 @@ await page.screenshot({ path: "tests/gimnyeong-ritual-check-1440x900.png", fullP
 await page.evaluate(() => renderGimnyeongDialogue("rhythm_request"));
 await page.locator("#gimnyeong-next").click();
 if (!(await page.locator("#gimnyeong-rhythm-game").isVisible())) throw new Error("멜후림 박자 게임이 열리지 않았습니다.");
+if (!(await page.locator("#gimnyeong-skip-rhythm").isVisible())) throw new Error("멜후림 미니게임 건너뛰기 버튼이 보이지 않습니다.");
 await page.evaluate(() => {
   state.gimnyeong.rhythmRound = 2;
   const beat = document.querySelector("#gim-rhythm-beat");
