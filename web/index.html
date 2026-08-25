@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173c3b" />
+    <title>제주너머 — 설문대 할망의 잃어버린 기억</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css?v=27" />
+  </head>
+  <body>
+    <div class="paper-grain" aria-hidden="true"></div>
+
+    <main id="game" class="game-shell">
+      <section id="title-screen" class="screen title-screen" aria-labelledby="game-title">
+        <div class="title-mountains" aria-hidden="true"></div>
+        <div class="title-copy">
+          <p class="eyebrow">잊힌 마을의 기억을 따라</p>
+          <h1 id="game-title"><span>제주</span><em>너머</em></h1>
+          <p class="subtitle">설문대 할망의 잃어버린 기억</p>
+          <p class="title-description">관광지 너머, 마을이 간직한 삶의 이야기를 만나는<br />제주 문화 탐험 어드벤처</p>
+          <button class="brush-button" data-action="start">기억의 길 열기 <span>→</span></button>
+        </div>
+        <div class="title-seal" aria-hidden="true"><span>濟州</span></div>
+        <p class="desktop-note">DESKTOP EXPERIENCE · 소리 없이 진행됩니다</p>
+      </section>
+
+      <section id="island-screen" class="screen island-screen is-active" aria-labelledby="island-title">
+        <header class="topbar island-topbar">
+          <button class="wordmark" data-action="home" aria-label="첫 화면으로">제주너머</button>
+          <div class="island-chapter">
+            <span>제주 전체 지도</span>
+            <strong id="island-title">열네 갈래 기억의 길</strong>
+          </div>
+          <div class="memory-counter" aria-label="기억의 조각 수">
+            <span class="counter-emblem memory-emblem" aria-hidden="true"><i></i></span>
+            <span class="counter-copy"><span>기억의 조각</span><strong id="global-piece-count">0 / 14</strong></span>
+            <span class="memory-shards" id="global-piece-visual" aria-hidden="true">
+              <i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i>
+              <i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i><i class="counter-slot"></i>
+            </span>
+          </div>
+        </header>
+
+        <div class="island-map" aria-label="제주도 전체와 열네 탐험 권역 선택 지도">
+          <div class="jeju-whole-map" aria-hidden="true"></div>
+          <div id="jeju-admin-map" class="jeju-admin-map" aria-label="실제 행정경계를 반영한 제주도 열네 탐험 권역 지도"></div>
+          <div class="island-map-caption">
+            <span>제주의 열네 권역</span>
+            <small>7읍 · 5면 · 두 동네 권역<br />마우스를 올려 각 동네를 살펴보세요</small>
+          </div>
+          <div class="boundary-source">경계 출처: 통계청 SGIS · vuski/admdongkor (2026.07, CC BY 4.0)</div>
+        </div>
+
+        <aside class="guide-card quest-status-card" aria-label="현재 탐험 지역">
+          <img src="/assets/baramsae.png" alt="게임 진행 안내자 바람새" />
+          <div class="guide-stage">
+            <span class="speaker">현재 탐험</span>
+            <strong id="island-guide-line">첫 번째 지역: 구좌읍</strong>
+            <small id="island-guide-detail">기억의 조각 1개를 찾아보세요</small>
+          </div>
+        </aside>
+      </section>
+
+      <section id="gujwa-screen" class="screen gujwa-screen" aria-labelledby="gujwa-title">
+        <div class="map-background" aria-hidden="true"></div>
+        <header class="topbar over-map">
+          <button class="wordmark" data-action="back-map">← 제주 전체 지도</button>
+          <div class="chapter-label"><span>첫 번째 마을</span><strong id="gujwa-title">구좌읍 · 기억의 바람</strong></div>
+          <div class="trace-counter" aria-label="구좌읍 기억의 흔적 수">
+            <span class="counter-copy"><span>기억의 흔적</span><strong id="trace-count">0 / 3</strong></span>
+            <span class="trace-slots" id="trace-visual" aria-hidden="true">
+              <i class="counter-slot" title="숲의 흔적"><svg viewBox="0 0 24 24"><path d="M12 4c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7Z"/><path d="M12 7c-2.4 0-4 1.7-4 4s1.6 4 4 4 4-1.7 4-4-1.6-4-4-4Z"/><path d="M12 9.5c-.9 0-1.6.7-1.6 1.5s.7 1.5 1.6 1.5 1.6-.7 1.6-1.5-.7-1.5-1.6-1.5Z"/></svg></i>
+              <i class="counter-slot" title="바다의 흔적"><svg viewBox="0 0 24 24"><path d="M4 9c2.2 0 2.2-2 4.4-2s2.2 2 4.4 2 2.2-2 4.4-2S19.4 9 21 9"/><path d="M3 13c2.4 0 2.4-2 4.8-2s2.4 2 4.8 2 2.4-2 4.8-2 2.4 2 4.6 2"/><path d="M5 17c2 0 2-1.6 4-1.6s2 1.6 4 1.6 2-1.6 4-1.6 2 1.6 3.5 1.6"/></svg></i>
+              <i class="counter-slot" title="시간의 흔적"><svg viewBox="0 0 24 24"><path d="M12 3 14.2 8.8 20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3Z"/><path d="M12 8v6M9 11h6"/></svg></i>
+            </span>
+          </div>
+        </header>
+
+        <button class="gujwa-reset-button" id="gujwa-reset" data-action="reset-gujwa" type="button">
+          <span>↺</span> 구좌읍 초기화
+        </button>
+
+        <div class="route-progress" aria-label="구좌읍 퀘스트 진행도">
+          <div class="route-fill" id="route-fill"></div>
+          <div class="route-step is-current" data-step="0"><i>1</i><span>송당리 본향당</span></div>
+          <div class="route-step is-locked" data-step="1"><i>2</i><span>하도리 토끼섬</span></div>
+          <div class="route-step is-locked" data-step="2"><i>3</i><span>동김녕리 해안</span></div>
+        </div>
+
+        <div class="regional-map-caption"><span>구좌읍 지형도</span><small>북쪽 ↑ · 마을의 실제 상대 위치를 따라 표시</small></div>
+
+        <button class="map-node node-songdang is-available" data-quest-index="0">
+          <span class="node-ring"></span><span class="node-number">01</span><span class="node-label"><b>송당리 본향당</b><small>내륙 · 당오름 북쪽 기슭</small></span>
+        </button>
+        <button class="map-node node-hado is-locked" data-quest-index="1" disabled>
+          <span class="node-ring"></span><span class="node-number">02</span><span class="node-label"><b>하도리 토끼섬</b><small>구좌 동북쪽 해안 · 굴동포구 앞</small></span>
+        </button>
+        <button class="map-node node-gimnyeong is-locked" data-quest-index="2" disabled>
+          <span class="node-ring"></span><span class="node-number">03</span><span class="node-label"><b>동김녕리 해안</b><small>구좌 서북쪽 해안</small></span>
+        </button>
+
+        <aside class="floating-guide" id="floating-guide">
+          <img src="/assets/baramsae.png" alt="바람새" />
+          <div class="dialogue-tail"></div>
+          <div class="dialogue"><span>바람새</span><p id="map-guide-line">맨 먼저 송당의 오래된 나무가 우리를 부르고 있어. 빛나는 표식을 눌러봐.</p></div>
+        </aside>
+      </section>
+
+      <section id="songdang-screen" class="screen songdang-screen" aria-labelledby="songdang-scene-title">
+        <div class="songdang-backdrop" aria-hidden="true"></div>
+        <div class="songdang-light" aria-hidden="true"></div>
+
+        <header class="topbar songdang-topbar">
+          <button class="wordmark" data-action="exit-songdang">← 구좌 지도</button>
+          <div class="songdang-chapter">
+            <span>기억의 흔적 1 · 송당리 본향당</span>
+            <strong id="songdang-scene-title">오래된 나무가 기억하는 것</strong>
+          </div>
+          <div class="songdang-top-actions">
+            <div class="songdang-progress" aria-label="송당 퀘스트 진행도"><i id="songdang-progress-fill"></i></div>
+            <button class="evidence-toggle" id="songdang-agent-toggle" type="button" aria-expanded="false" hidden><i></i> 판정 과정</button>
+          </div>
+        </header>
+
+        <button class="point-skip-button" id="songdang-skip-point" data-action="skip-current-point" type="button">
+          지점 전체 건너뛰기 <span>≫</span>
+        </button>
+
+        <div class="songdang-stage" id="songdang-stage">
+          <div class="songdang-location-card">
+            <span id="songdang-location-kicker">구좌읍 송당리</span>
+            <strong id="songdang-location-label">본향당 숲 입구</strong>
+          </div>
+
+          <div class="songdang-character songdang-elder" id="songdang-elder" aria-hidden="true">
+            <div class="character-halo"></div>
+            <img src="/assets/npc-songdang-gointek.png" alt="" />
+            <div class="character-tag"><span>송당 본향당 당지기 · 72세</span><strong>고인택 어르신</strong></div>
+          </div>
+
+          <div class="songdang-character songdang-bird" id="songdang-bird" aria-hidden="true">
+            <img src="/assets/baramsae.png" alt="" />
+          </div>
+
+          <div class="songdang-offering-game" id="songdang-offering-game" hidden>
+            <div class="offering-heading">
+              <span>지전물색 올리기</span>
+              <h3>신목에 지전물색을 걸어 정성을 올리세요</h3>
+              <p>아래 바구니의 제물을 순서대로 선택하세요.</p>
+            </div>
+            <div class="offering-tree" aria-hidden="true"><i></i><strong>송당 팽나무</strong><small>지전물색을 걸 자리</small></div>
+            <div class="offering-items">
+              <button data-offering-order="1" type="button"><i>紙</i><span><small>1. 지전</small><strong>흰 한지</strong></span></button>
+              <b aria-hidden="true">→</b>
+              <button data-offering-order="2" type="button"><i>色</i><span><small>2. 물색</small><strong>오색 천</strong></span></button>
+            </div>
+            <p class="offering-status" id="songdang-offering-status" aria-live="polite">먼저 하얀 지전을 선택하세요.</p>
+          </div>
+
+          <div class="songdang-memory-reward" id="songdang-memory-reward" hidden>
+            <div class="memory-rings" aria-hidden="true"></div>
+            <div class="trace-emblem">結</div>
+            <p>기억의 흔적 ①</p>
+            <h3>함께 지켜온 숲의 약속</h3>
+            <div class="trace-status"><span>구좌읍 기억의 흔적</span><strong>1 / 3</strong></div>
+            <div class="global-status"><span>설문대할망의 기억 조각</span><strong>0 / 14</strong></div>
+            <button class="brush-button" id="songdang-complete" type="button">다음 이야기 듣기 <span>→</span></button>
+          </div>
+
+        </div>
+
+        <div class="songdang-dialogue" id="songdang-dialogue">
+          <div class="dialogue-speaker">
+            <div class="dialogue-avatar is-player" id="songdang-speaker-avatar" aria-hidden="true">
+              <img id="songdang-speaker-avatar-image" alt="" hidden />
+              <span id="songdang-speaker-avatar-mark">나</span>
+            </div>
+            <div class="dialogue-speaker-copy">
+              <strong id="songdang-speaker">플레이어</strong>
+            </div>
+          </div>
+          <div class="dialogue-body">
+            <button class="dialogue-translation-toggle" id="songdang-translation-toggle" type="button" aria-pressed="false" hidden>표준어</button>
+            <p id="songdang-dialogue-text">분명 바람이 부는데, 저 나무 주변만 시간이 멈춘 것 같아.</p>
+          </div>
+          <div class="dialogue-actions">
+            <div class="songdang-choices" id="songdang-choices" hidden></div>
+            <div class="dialogue-nav">
+              <button class="dialogue-back" id="songdang-back" type="button" disabled><span>←</span> 뒤로</button>
+              <button class="dialogue-next" id="songdang-next" type="button">계속 <span>→</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="songdang-answer" id="songdang-answer" hidden>
+          <button class="songdang-practice-skip" id="songdang-skip-practice" type="button">제주어 입력 건너뛰기 <span>→</span></button>
+          <div class="answer-prompt">
+            <span id="songdang-practice-kicker">제주어로 말하기</span>
+            <h3 id="songdang-practice-title">당지기 삼춘께 인사를 건네보세요.</h3>
+            <p id="songdang-practice-guide">안녕하우꽈? 또는 편안허우꽈?라고 말할 수 있어요.</p>
+          </div>
+          <label for="songdang-answer-input">
+            <textarea id="songdang-answer-input" maxlength="300" rows="3" placeholder="제주어 문장을 입력하세요"></textarea>
+            <span><b id="songdang-char-count">0</b> / 300</span>
+          </label>
+          <div class="agent-wind" id="songdang-agent-wind" hidden aria-live="polite" aria-busy="true">
+            <div class="inline-evaluation-heading">
+              <i aria-hidden="true"></i>
+              <div>
+                <strong>Gemini가 답변을 판독하고 있습니다</strong>
+                <p>문장 의미를 확인한 뒤 제주어 표현을 검사합니다.</p>
+              </div>
+            </div>
+            <div class="wind-steps" aria-label="답변 판독 절차">
+              <span class="is-working" data-inline-agent="culture"><b>1</b><em>문장 의미</em><small>분석 중</small></span>
+              <span data-inline-agent="dialect"><b>2</b><em>제주어 표현</em><small>대기</small></span>
+            </div>
+          </div>
+          <div class="practice-evaluation" id="songdang-practice-evaluation" role="status" aria-live="polite" hidden>
+            <div class="practice-evaluation-heading">
+              <span>판정 결과</span>
+              <strong id="songdang-practice-evaluation-summary"></strong>
+            </div>
+            <p id="songdang-practice-evaluation-detail"></p>
+            <small id="songdang-practice-evaluation-hint"></small>
+          </div>
+          <div class="practice-hints"><span>도움말</span><p id="songdang-practice-hints">안녕하우꽈? · 편안허우꽈?</p></div>
+          <div class="songdang-answer-actions">
+            <button class="text-button" id="songdang-review-clues" type="button" hidden>이전 장면 보기</button>
+            <button class="text-button presentation-answer" id="songdang-demo-fill" type="button">예시 문장 불러오기</button>
+            <button class="submit-button" id="songdang-submit" type="button"><span>말 건네기</span><i>→</i></button>
+          </div>
+        </div>
+
+        <aside class="songdang-agent-drawer" id="songdang-agent-drawer" aria-hidden="true" aria-label="Gemini 멀티 에이전트 판정 과정">
+          <div class="drawer-header"><div><span>LIVE AGENT TRACE</span><strong>Gemini 판정 과정</strong></div><button id="songdang-agent-close" type="button" aria-label="판정 과정 닫기">×</button></div>
+          <div class="drawer-pipeline">
+            <div data-songdang-agent="culture"><i>1</i><span>문장 의미 판정</span><small id="songdang-culture-state">대기</small></div>
+            <div data-songdang-agent="dialect"><i>2</i><span>제주어 표현 판정</span><small id="songdang-dialect-state">대기</small></div>
+          </div>
+          <div class="drawer-result"><span>문장 의미</span><p id="songdang-culture-feedback">아직 판정하지 않았습니다.</p></div>
+          <div class="drawer-result"><span>제주어 표현</span><p id="songdang-dialect-feedback">아직 판정하지 않았습니다.</p></div>
+          <div class="drawer-evidence"><span>공식 자료 근거</span><p id="songdang-grounding">판정 후 사용한 근거 ID가 표시됩니다.</p></div>
+          <p class="fiction-note">고인택 어르신은 송당리 이야기를 전달하기 위해 구성한 게임 속 인물입니다.</p>
+        </aside>
+      </section>
+
+      <section id="hado-screen" class="screen hado-screen" aria-labelledby="hado-scene-title">
+        <div class="hado-backdrop" aria-hidden="true"></div>
+        <div class="hado-sunlight" aria-hidden="true"></div>
+
+        <header class="topbar songdang-topbar">
+          <button class="wordmark" data-action="exit-hado">← 구좌 지도</button>
+          <div class="songdang-chapter">
+            <span>기억의 흔적 2 · 하도리 토끼섬</span>
+            <strong id="hado-scene-title">바람과 모래가 지킨 하얀 꽃</strong>
+          </div>
+          <div class="songdang-top-actions">
+            <div class="songdang-progress" aria-label="하도리 퀘스트 진행도"><i id="hado-progress-fill"></i></div>
+          </div>
+        </header>
+
+        <button class="point-skip-button" data-action="skip-current-point" type="button">
+          지점 전체 건너뛰기 <span>≫</span>
+        </button>
+
+        <div class="hado-stage">
+          <div class="songdang-location-card">
+            <span>구좌읍 하도리</span>
+            <strong id="hado-location-label">하도리 바닷가</strong>
+          </div>
+
+          <div class="hado-character hado-guide" id="hado-guide" aria-hidden="true">
+            <img src="/assets/baramsae.png" alt="" />
+          </div>
+          <div class="hado-character hado-npc" id="hado-npc" aria-hidden="true">
+            <img src="/assets/npc-hado.png" alt="" />
+            <div class="character-tag"><strong>문정해 삼춘</strong></div>
+          </div>
+          <div class="hado-memory-visitor" id="hado-memory-visitor" aria-hidden="true">
+            <i></i><span>기억 속 방문자</span>
+          </div>
+
+          <div class="hado-memory-game" id="hado-memory-game" hidden>
+            <div class="hado-game-copy">
+              <span>바람 망원경</span>
+              <h3>토끼섬의 세 가지 기억을 찾아보세요</h3>
+              <p>해안에서 섬을 관찰합니다. 실제 보호구역에는 들어가지 않아요.</p>
+            </div>
+            <div class="hado-viewfinder" aria-label="토끼섬 관찰 화면">
+              <span class="viewfinder-ring" aria-hidden="true"></span>
+              <button class="hado-observation observation-flower" data-hado-observation="flower" type="button"><i>1</i><span>하얀 꽃</span></button>
+              <button class="hado-observation observation-ground" data-hado-observation="ground" type="button"><i>2</i><span>모래와 바위</span></button>
+              <button class="hado-observation observation-name" data-hado-observation="name" type="button"><i>3</i><span>바람 속 글자</span></button>
+            </div>
+            <div class="hado-observation-records" aria-label="관찰 기록">
+              <span data-hado-record="flower"><i>1</i> 문주란꽃</span>
+              <span data-hado-record="ground"><i>2</i> 모래와 현무암</span>
+              <span data-hado-record="name"><i>3</i> 난들여</span>
+            </div>
+            <p id="hado-game-status" aria-live="polite">빛나는 관찰 지점 세 곳을 찾아주세요. 0 / 3</p>
+          </div>
+
+          <div class="hado-reward" id="hado-reward" hidden>
+            <div class="memory-rings" aria-hidden="true"></div>
+            <div class="trace-emblem">花</div>
+            <p>기억의 흔적 ②</p>
+            <h3>바람과 모래가 지킨 하얀 꽃</h3>
+            <div class="trace-status"><span>구좌읍 기억의 흔적</span><strong>2 / 3</strong></div>
+            <button class="brush-button" id="hado-reward-continue" type="button">다음 이야기 듣기 <span>→</span></button>
+          </div>
+        </div>
+
+        <div class="songdang-dialogue hado-dialogue" id="hado-dialogue">
+          <div class="dialogue-speaker">
+            <div class="dialogue-avatar is-player" id="hado-speaker-avatar" aria-hidden="true">
+              <img id="hado-speaker-avatar-image" alt="" hidden />
+            </div>
+            <div class="dialogue-speaker-copy"><strong id="hado-speaker">플레이어</strong></div>
+          </div>
+          <div class="dialogue-body">
+            <button class="dialogue-translation-toggle" id="hado-translation-toggle" type="button" aria-pressed="false" hidden>표준어</button>
+            <p id="hado-dialogue-text">여기 되게 예쁘다! 저기 바다 위에 하얗게 뜬 작은 바위섬은 뭐야?</p>
+          </div>
+          <div class="dialogue-actions">
+            <div class="songdang-choices" id="hado-choices" hidden></div>
+            <div class="dialogue-nav">
+              <button class="dialogue-back" id="hado-back" type="button" disabled><span>←</span> 뒤로</button>
+              <button class="dialogue-next" id="hado-next" type="button">계속 <span>→</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="songdang-answer hado-answer" id="hado-answer" hidden>
+          <button class="songdang-practice-skip" id="hado-skip-answer" type="button">제주어 입력 건너뛰기 <span>→</span></button>
+          <div class="answer-prompt">
+            <span>기억 속 방문자에게 말하기</span>
+            <h3>문주란을 꺾지 말고 소중히 지켜달라는 뜻을 제주어로 전해보세요.</h3>
+            <p>먼저 보호의 뜻을 자연스럽게 잇고, 배운 제주어 표현을 활용해보세요.</p>
+          </div>
+          <label for="hado-answer-input">
+            <textarea id="hado-answer-input" maxlength="300" rows="3" placeholder="예: 토끼섬 문주란은 소중허우다…"></textarea>
+            <span><b id="hado-char-count">0</b> / 300</span>
+          </label>
+          <div class="agent-wind" id="hado-agent-wind" hidden aria-live="polite">
+            <div class="inline-evaluation-heading"><i aria-hidden="true"></i><div><strong>Gemini가 답변을 판독하고 있습니다</strong><p>문장 의미를 확인한 뒤 제주어 표현을 검사합니다.</p></div></div>
+            <div class="wind-steps"><span class="is-working" data-hado-agent="culture"><b>1</b><em>문장 의미</em><small>분석 중</small></span><span data-hado-agent="dialect"><b>2</b><em>제주어 표현</em><small>대기</small></span></div>
+          </div>
+          <div class="practice-evaluation" id="hado-feedback" role="status" aria-live="polite" hidden>
+            <div class="practice-evaluation-heading"><span>판정 결과</span><strong id="hado-feedback-summary"></strong></div>
+            <p id="hado-feedback-detail"></p><small id="hado-feedback-hint"></small>
+          </div>
+          <div class="practice-hints"><span>도움말</span><p>문주란 · 꺾지 맙서 · 지켜줍서</p></div>
+          <div class="songdang-answer-actions">
+            <button class="text-button presentation-answer" id="hado-demo-fill" type="button">예시 문장 불러오기</button>
+            <button class="submit-button" id="hado-submit" type="button"><span>말 건네기</span><i>→</i></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="gimnyeong-screen" class="screen gimnyeong-screen" aria-labelledby="gimnyeong-scene-title">
+        <div class="gimnyeong-backdrop" aria-hidden="true"></div>
+        <header class="topbar songdang-topbar">
+          <button class="wordmark" data-action="exit-gimnyeong">← 구좌 지도</button>
+          <div class="songdang-chapter"><span>기억의 흔적 3 · 동김녕리 해안</span><strong id="gimnyeong-scene-title">함께 빌고, 함께 당긴 바다</strong></div>
+          <div class="songdang-top-actions"><div class="songdang-progress"><i id="gimnyeong-progress-fill"></i></div></div>
+        </header>
+        <button class="point-skip-button" data-action="skip-current-point" type="button">지점 전체 건너뛰기 <span>≫</span></button>
+
+        <div class="gimnyeong-stage">
+          <div class="songdang-location-card"><span>구좌읍 동김녕리</span><strong id="gimnyeong-location-label">동김녕리 해안</strong></div>
+          <div class="gimnyeong-character gimnyeong-guide" id="gimnyeong-guide"><img src="/assets/baramsae.png" alt="" /></div>
+          <div class="gimnyeong-character gimnyeong-npc" id="gimnyeong-npc"><img src="/assets/npc-gimnyeong.png" alt="" /><div class="character-tag"><strong>순덕 삼춘</strong></div></div>
+
+          <div class="gimnyeong-ritual-game" id="gimnyeong-ritual-game" hidden>
+            <div class="gim-game-heading"><span>기억 맞추기 ① · 잠수굿</span><h3>해녀들이 바다 앞에서 함께 빈 것은 무엇일까요?</h3><p>잠수굿에 담긴 두 가지 공동체의 바람을 골라주세요.</p></div>
+            <div class="ritual-memory-cards">
+              <button data-gim-ritual="safety" data-correct="true"><i>安</i><strong>해녀들의 무사함</strong><small>물질을 마치고 모두 무사히 돌아오기를</small></button>
+              <button data-gim-ritual="abundance" data-correct="true"><i>豊</i><strong>해산물의 풍요</strong><small>바다가 넉넉한 생명을 내어주기를</small></button>
+              <button data-gim-ritual="tourism" data-correct="false"><i>遊</i><strong>개인의 관광 소원</strong><small>나 혼자 좋은 구경을 하기를</small></button>
+              <button data-gim-ritual="success" data-correct="false"><i>私</i><strong>혼자만의 성공</strong><small>다른 사람보다 앞서기를</small></button>
+            </div>
+            <p id="gimnyeong-ritual-status" aria-live="polite">서로 이어지는 기억 두 개를 선택하세요. 0 / 2</p>
+          </div>
+
+          <div class="gimnyeong-rhythm-game" id="gimnyeong-rhythm-game" hidden>
+            <div class="gim-game-heading"><span>기억 맞추기 ② · 멜후림소리</span><h3>메기는 소리와 받는 소리에 맞춰 그물을 당겨보세요</h3><p>빛이 주황색 매듭에 닿을 때 버튼을 누르세요. 소리 없이도 박자를 눈으로 확인할 수 있어요.</p></div>
+            <div class="gim-rhythm-lane"><span class="rhythm-caller">메기는 소리</span><div class="rhythm-track"><i id="gim-rhythm-beat"></i><b></b></div><span class="rhythm-chorus">받는 소리</span></div>
+            <div class="gim-net-progress" aria-label="그물 당기기 진행도"><i id="gim-net-fill"></i><span id="gim-rhythm-count">0 / 3</span></div>
+            <button class="brush-button gim-pull-button" id="gim-pull-button" type="button">함께 당기기 <span>↔</span></button>
+            <p id="gim-rhythm-status" aria-live="polite">준비되면 버튼을 눌러 박자를 시작하세요.</p>
+          </div>
+
+          <div class="gimnyeong-reward" id="gimnyeong-reward" hidden>
+            <div class="memory-rings" aria-hidden="true"></div><div class="trace-emblem">息</div><p>기억의 흔적 ③</p><h3>함께한 바다의 숨</h3>
+            <div class="trace-status"><span>구좌읍 기억의 흔적</span><strong>3 / 3</strong></div>
+            <button class="brush-button" id="gimnyeong-reward-continue" type="button">구좌의 기억 완성하기 <span>→</span></button>
+          </div>
+        </div>
+
+        <div class="songdang-dialogue gimnyeong-dialogue" id="gimnyeong-dialogue">
+          <div class="dialogue-speaker"><div class="dialogue-avatar is-player" id="gimnyeong-speaker-avatar"><img id="gimnyeong-speaker-avatar-image" alt="" hidden /></div><div class="dialogue-speaker-copy"><strong id="gimnyeong-speaker">플레이어</strong></div></div>
+          <div class="dialogue-body"><button class="dialogue-translation-toggle" id="gimnyeong-translation-toggle" type="button" aria-pressed="false" hidden>표준어</button><p id="gimnyeong-dialogue-text">파도 소리가 가까워졌어. 여기가 동김녕리 해안이구나!</p></div>
+          <div class="dialogue-actions"><div class="songdang-choices" id="gimnyeong-choices" hidden></div><div class="dialogue-nav"><button class="dialogue-back" id="gimnyeong-back" type="button" disabled><span>←</span> 뒤로</button><button class="dialogue-next" id="gimnyeong-next" type="button">계속 <span>→</span></button></div></div>
+        </div>
+
+        <div class="songdang-answer gimnyeong-answer" id="gimnyeong-answer" hidden>
+          <button class="songdang-practice-skip" id="gimnyeong-skip-answer" type="button">제주어 입력 건너뛰기 <span>→</span></button>
+          <div class="answer-prompt"><span>멜 그물을 당길 사람들에게 외치기</span><h3>마을 사람들에게 함께 모여 멜 그물을 당기자고 제주어로 말해보세요.</h3><p>문장 전체의 뜻을 먼저 확인한 뒤, 이 장면에 맞는 제주어 표현을 검사합니다.</p></div>
+          <label for="gimnyeong-answer-input"><textarea id="gimnyeong-answer-input" maxlength="300" rows="3" placeholder="예: 다 같이 모영 멜 그물을…"></textarea><span><b id="gimnyeong-char-count">0</b> / 300</span></label>
+          <div class="agent-wind" id="gimnyeong-agent-wind" hidden aria-live="polite"><div class="inline-evaluation-heading"><i></i><div><strong>Gemini가 답변을 판독하고 있습니다</strong><p>문장 의미를 확인한 뒤 제주어 표현을 검사합니다.</p></div></div><div class="wind-steps"><span class="is-working" data-gim-agent="culture"><b>1</b><em>문장 의미</em><small>분석 중</small></span><span data-gim-agent="dialect"><b>2</b><em>제주어 표현</em><small>대기</small></span></div></div>
+          <div class="practice-evaluation" id="gimnyeong-feedback" role="status" aria-live="polite" hidden><div class="practice-evaluation-heading"><span>판정 결과</span><strong id="gimnyeong-feedback-summary"></strong></div><p id="gimnyeong-feedback-detail"></p><small id="gimnyeong-feedback-hint"></small></div>
+          <div class="practice-hints"><span>도움말</span><p>멜 · 모영 · 당겨봅서</p></div>
+          <div class="songdang-answer-actions"><button class="text-button presentation-answer" id="gimnyeong-demo-fill" type="button">예시 문장 불러오기</button><button class="submit-button" id="gimnyeong-submit" type="button"><span>말 건네기</span><i>→</i></button></div>
+        </div>
+      </section>
+
+      <section id="quest-screen" class="screen quest-screen" aria-labelledby="quest-title">
+        <div class="quest-backdrop" id="quest-backdrop"></div>
+        <header class="topbar over-map">
+          <button class="wordmark" data-action="exit-quest">← 구좌 지도</button>
+          <div class="quest-stage-chip"><span id="quest-order">기억의 흔적 1</span><strong id="quest-location-top">송당리 본향당</strong></div>
+          <button class="agent-status" id="agent-status" type="button" aria-label="에이전트 연결 상태"><i></i><span>Gemini 판별 대기</span></button>
+        </header>
+
+        <button class="point-skip-button" id="quest-skip-point" data-action="skip-current-point" type="button">
+          지점 전체 건너뛰기 <span>≫</span>
+        </button>
+
+        <div class="quest-layout">
+          <div class="npc-stage">
+            <div class="scene-vignette"></div>
+            <div class="npc-aura"></div>
+            <div class="npc-placeholder" id="npc-portrait" aria-hidden="true"><span id="npc-symbol">木</span></div>
+            <div class="npc-nameplate"><span id="npc-role">송당 본향당 당지기</span><strong id="npc-name">고인택 어르신</strong></div>
+          </div>
+
+          <article class="quest-panel">
+            <div class="quest-heading">
+              <span class="quest-kicker" id="quest-kicker">QUEST 01 · 함께 지켜온 숲의 약속</span>
+              <h2 id="quest-title">오래된 나무가 기억하는 것</h2>
+              <p id="quest-story">당의 오래된 물색이 바람에 풀려나가고 있습니다. 마을 사람들이 함께 지켜온 마음을 떠올려 매듭을 되살려 주세요.</p>
+            </div>
+
+            <blockquote class="npc-line"><span id="line-speaker">고인택 어르신</span><p id="npc-line">“할망의 숲의 기억 흔적을 깨워보겠는가?”</p></blockquote>
+
+            <div class="mission-box">
+              <div class="mission-label"><span>당신의 임무</span><small>문화 지식 + 제주어 표현</small></div>
+              <p id="quest-question">송당 사람들이 오랜 시간 본향당에 함께 모인 까닭을 제주어로 설명하세요.</p>
+            </div>
+
+            <label class="answer-box" for="answer-input">
+              <textarea id="answer-input" maxlength="800" rows="4" placeholder="제주어로 답해보세요. 예: 마을 사람들이 모영…"></textarea>
+              <span class="char-count"><b id="char-count">0</b> / 800</span>
+            </label>
+            <div class="answer-actions">
+              <button class="text-button" id="demo-fill" type="button">발표용 답안 불러오기</button>
+              <button class="submit-button" id="submit-answer" type="button"><span>Gemini에게 판별 요청</span><i>→</i></button>
+            </div>
+
+            <div class="evaluation-panel" id="evaluation-panel" aria-live="polite">
+              <div class="pipeline">
+                <div class="pipeline-step" data-agent="culture"><i>1</i><span>문화 지식</span><small>근거 대조</small></div>
+                <div class="pipeline-join">+</div>
+                <div class="pipeline-step" data-agent="dialect"><i>2</i><span>제주어</span><small>표현 판별</small></div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step" data-agent="verify"><i>3</i><span>신뢰성</span><small>교차 검증</small></div>
+              </div>
+              <div class="evaluation-message" id="evaluation-message"></div>
+              <div class="evaluation-details" id="evaluation-details" hidden>
+                <div class="feedback-item" id="knowledge-result"><span>문화 지식</span><p id="knowledge-feedback"></p></div>
+                <div class="feedback-item" id="dialect-result"><span>제주어 표현</span><p id="dialect-feedback"></p></div>
+                <div class="grounding-note" id="grounding-note"><span>공식 자료 근거</span><p id="grounding-evidence"></p></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="reward-screen" class="screen reward-screen" aria-labelledby="reward-title">
+        <div class="reward-rays" aria-hidden="true"></div>
+        <div class="reward-content">
+          <p class="eyebrow">GUJWA MEMORY RESTORED</p>
+          <h2 id="reward-title">흩어진 세 기억이<br /><em>하나의 바람</em>이 되었습니다</h2>
+          <div class="trace-combine" aria-label="획득한 세 기억의 흔적">
+            <div><i>結</i><span>함께 지켜온 숲의 약속</span></div><b>+</b><div><i>花</i><span>바람과 모래가 지킨 하얀 꽃</span></div><b>+</b><div><i>息</i><span>함께한 바다의 숨</span></div>
+          </div>
+          <div class="memory-piece">
+            <span class="piece-glow"></span><span class="piece-shape">✦</span>
+            <div><small>설문대 할망의 기억</small><strong>구좌의 바람</strong><p>1 / 14 번째 조각</p></div>
+          </div>
+          <p class="reward-copy">마을마다 다른 삶의 기억이 모일 때, 비로소 제주의 이야기가 완성됩니다.</p>
+          <button class="brush-button" data-action="finish-gujwa">다음 기억의 길 확인하기 <span>→</span></button>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status"></div>
+    </main>
+
+    <script src="/static/jeju-map-data.js?v=4" defer></script>
+    <script src="/static/agent-api.js?v=3" defer></script>
+    <script src="/static/game.js?v=29" defer></script>
+  </body>
+</html>

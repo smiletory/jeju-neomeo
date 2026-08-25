@@ -1,0 +1,27 @@
+# Agent Runtime only needs the Python service and its build metadata.
+.git/
+.env
+.venv/
+**/__pycache__/
+**/*.pyc
+.pytest_cache/
+.ruff_cache/
+.google-agents-cli/
+
+# Local game, evaluation artifacts, infrastructure state, and documentation.
+artifacts/
+deployment/
+docs/
+infra/
+scripts/
+tests/
+web/
+Dockerfile.game
+.gcloudignore.game
+cloudbuild.game.yaml
+
+# Local-only project controls.
+AGENTS.md
+agents-cli-manifest.yaml
+deployment_metadata.json
+start-demo.ps1

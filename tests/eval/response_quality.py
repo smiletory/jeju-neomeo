@@ -1,0 +1,49 @@
+"""Local LLM-as-judge for `custom_response_quality` (see eval_config.yaml)."""
+
+from google import genai
+from google.genai import types
+from pydantic import BaseModel
+
+
+class _Verdict(BaseModel):
+    score: int  # 1-5
+    explanation: str
+
+
+def evaluate(instance):
+    reference = instance.get("reference")
+    rubric = (
+        "Grade this Jeju game multi-agent evaluation on a 1-5 scale. "
+        "The recommended_verdict, pass/fail fields, evidence IDs, and detected "
+        "dialect feature IDs must agree with the expected answer. A false pass, "
+        "invented grounding ID, or failure to reject an off-topic answer must "
+        "score 1. Reserve score 5 for a fully correct, grounded decision."
+    )
+    if reference:
+        rubric += (
+            " The response should agree with the expected answer below; penalize "
+            "factual disagreement with it."
+        )
+    prompt = (
+        f"You are an expert evaluator for the 제주너머 game. {rubric}\n"
+        f"User Prompt: {instance.get('prompt', '')}\n"
+        f"Final Response: {instance.get('response', '')}\n"
+    )
+    if reference:
+        prompt += f"Expected Answer (ground truth): {reference}\n"
+    prompt += f"Full Agent Trace: {instance.get('agent_data', '')}\n"
+
+    client = genai.Client()  # AI Studio (GEMINI_API_KEY) or Agent Platform (ADC)
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0,  # deterministic grading
+            response_mime_type="application/json",
+            response_schema=_Verdict,  # guaranteed schema-valid JSON
+        ),
+    )
+    verdict = response.parsed
+    if verdict is None:  # model returned nothing usable
+        return {"score": 0, "explanation": response.text or ""}
+    return {"score": max(1, min(5, verdict.score)), "explanation": verdict.explanation}

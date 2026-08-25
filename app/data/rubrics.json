@@ -1,0 +1,219 @@
+{
+  "dialect_catalog": [
+    {
+      "id": "JEJ_ENDING_UDA",
+      "description": "제주어의 공손한 서술 종결 표현 -우다/-수다 계열",
+      "examples": ["거우다", "허우다"]
+    },
+    {
+      "id": "JEJ_CONNECT_YEONG",
+      "description": "연결 표현 -영/-엉 계열",
+      "examples": ["모영", "이엉"]
+    },
+    {
+      "id": "JEJ_LEXICON_BATANG",
+      "description": "바다를 뜻하는 제주어 어휘",
+      "examples": ["바당"]
+    },
+    {
+      "id": "JEJ_LEXICON_MEL",
+      "description": "멸치를 뜻하는 제주어 어휘",
+      "examples": ["멜"]
+    },
+    {
+      "id": "JEJ_POLITE_MARKER",
+      "description": "상대를 높이는 제주어 담화 표지 후보",
+      "examples": ["마씀", "마씸"]
+    }
+  ],
+  "quests": [
+    {
+      "quest_id": "gujwa_songdang_01",
+      "version": "1.0",
+      "location": "송당리 본향당",
+      "task_type": "explain_cultural_meaning",
+      "learning_goal_id": "SONGDANG_COMMUNITY_RITE",
+      "learning_goal": "송당리마을제가 개인 소원 중심이 아니라 주민이 함께 마을의 안녕과 생업을 기원하며 이어온 공동체 의례임을 자신의 말로 설명한다.",
+      "default_question_id": "community_reason",
+      "question_variants": [
+        {"id": "community_reason", "text": "송당 사람들이 오랜 시간 본향당에 함께 모인 까닭을 제주어로 설명하세요."},
+        {"id": "community_meaning", "text": "송당 마을 사람들에게 본향당의 마을제는 어떤 의미였는지 제주어로 설명하세요."},
+        {"id": "collective_wish", "text": "송당 사람들이 본향당에서 함께 무엇을 빌고 이어왔는지 제주어로 이야기해보세요."},
+        {
+          "id": "practice_greeting",
+          "text": "처음 만난 송당 본향당 당지기 어르신께 제주어로 인사하세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "처음 만난 당지기 어르신을 삼춘이라 부르며 예의 있게 인사한다.",
+          "expected_intents": ["당지기 어르신에게 건네는 첫 인사"],
+          "required_concepts": ["어르신을 부름", "안부 또는 인사"],
+          "optional_concepts": [],
+          "forbidden_claims": [],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "greeting_address", "forms": ["삼춘"], "meaning": "동네 어르신이나 이웃을 부르는 호칭", "usage": "당지기 어르신을 직접 부를 때"},
+            {"id": "greeting_salutation", "forms": ["안녕하우꽈", "편안허우꽈"], "meaning": "안녕하십니까 또는 편안하십니까", "usage": "첫 만남의 인사를 건넬 때"}
+          ],
+          "hint_ids": ["SONG_GREETING_MEANING", "SONG_GREETING_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "SONG_GREETING_MEANING", "retry_knowledge": "SONG_GREETING_MEANING", "retry_dialect": "SONG_GREETING_DIALECT", "needs_review": "SONG_GREETING_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        },
+        {
+          "id": "practice_purpose",
+          "text": "설문대할망의 기억을 찾으러 왔으며 아는 것이 있는지 당지기 어르신께 제주어로 물어보세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "설문대할망의 기억을 찾으러 온 목적을 밝히고 당지기에게 단서를 묻는다.",
+          "expected_intents": ["방문 목적 설명", "당지기에게 단서 질문"],
+          "required_concepts": ["설문대할망의 기억을 찾으러 옴", "아는 것이 있는지 질문함"],
+          "optional_concepts": [],
+          "forbidden_claims": [],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "purpose_halmang", "forms": ["할망"], "meaning": "할머니", "usage": "설문대할망을 가리킬 때"},
+            {"id": "purpose_arrival", "forms": ["왔수다"], "meaning": "왔습니다", "usage": "찾으러 온 목적을 말할 때"},
+            {"id": "purpose_address", "forms": ["삼춘"], "meaning": "동네 어르신이나 이웃을 부르는 호칭", "usage": "당지기 어르신을 직접 부를 때"},
+            {"id": "purpose_question", "forms": ["이서마씸", "이시마씸"], "meaning": "있습니까", "usage": "아는 것이 있는지 공손하게 물을 때"}
+          ],
+          "hint_ids": ["SONG_PURPOSE_MEANING", "SONG_PURPOSE_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "SONG_PURPOSE_MEANING", "retry_knowledge": "SONG_PURPOSE_MEANING", "retry_dialect": "SONG_PURPOSE_DIALECT", "needs_review": "SONG_PURPOSE_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        },
+        {
+          "id": "practice_invocation",
+          "text": "지전물색을 정성껏 걸었으며 숲의 기억이 깨어나길 바란다고 신목을 향해 제주어로 전하세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "지전물색을 건 행동과 숲의 기억이 깨어나길 바라는 청원을 함께 전한다.",
+          "expected_intents": ["지전물색을 걸었음을 보고", "숲의 기억이 깨어나길 청원"],
+          "required_concepts": ["지전물색을 걸었음", "숲의 기억이 깨어나길 바람"],
+          "optional_concepts": ["정성"],
+          "forbidden_claims": [],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "invocation_offering", "forms": ["지전물색"], "meaning": "신목에 거는 흰 종이와 오색 천", "usage": "방금 건 제물을 말할 때"},
+            {"id": "invocation_completed", "forms": ["걸었수다"], "meaning": "걸었습니다", "usage": "지전물색을 거는 행동을 마쳤다고 말할 때"},
+            {"id": "invocation_request", "forms": ["줍서"], "meaning": "주십시오", "usage": "기억이 깨어나게 해 달라고 청할 때"}
+          ],
+          "hint_ids": ["SONG_INVOCATION_MEANING", "SONG_INVOCATION_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "SONG_INVOCATION_MEANING", "retry_knowledge": "SONG_INVOCATION_MEANING", "retry_dialect": "SONG_INVOCATION_DIALECT", "needs_review": "SONG_INVOCATION_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        },
+        {
+          "id": "practice_farewell",
+          "text": "고인택 삼춘께 감사하고 하도리로 떠나겠다고 제주어로 인사하세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "당지기에게 감사를 전하고 다음 목적지인 하도리로 떠난다고 인사한다.",
+          "expected_intents": ["당지기에게 감사", "하도리로 출발"],
+          "required_concepts": ["감사 인사", "하도리로 떠남"],
+          "optional_concepts": [],
+          "forbidden_claims": [],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "farewell_thanks", "forms": ["고맙수다"], "meaning": "감사합니다", "usage": "당지기에게 감사할 때"},
+            {"id": "farewell_address", "forms": ["삼춘"], "meaning": "동네 어르신이나 이웃을 부르는 호칭", "usage": "당지기 어르신을 직접 부를 때"},
+            {"id": "farewell_destination", "forms": ["하도리"], "meaning": "다음 목적지인 하도리", "usage": "어디로 떠나는지 말할 때"},
+            {"id": "farewell_departure", "forms": ["가보쿠다"], "meaning": "가보겠습니다", "usage": "하도리로 떠나겠다고 말할 때"}
+          ],
+          "hint_ids": ["SONG_FAREWELL_MEANING", "SONG_FAREWELL_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "SONG_FAREWELL_MEANING", "retry_knowledge": "SONG_FAREWELL_MEANING", "retry_dialect": "SONG_FAREWELL_DIALECT", "needs_review": "SONG_FAREWELL_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        }
+      ],
+      "optional_concepts": ["세대 간 문화 전승"],
+      "evidence": [
+        {"id": "songdang_01", "fact": "송당리마을제는 주민이 함께 마을의 안녕과 생업을 기원하며 이어온 공동체 의례다."},
+        {"id": "songdang_02", "fact": "송당리마을제에는 신과세제, 영등제, 마불림제, 시만곡대제의 네 제일이 전승된다."}
+      ],
+      "required_concepts": ["주민 공동체", "마을의 안녕 또는 생업", "기억과 전승"],
+      "forbidden_claims": ["개인의 관광 소원만을 비는 장소", "설문대 할망이 송당리마을제를 만들었다"],
+      "minimum_dialect_features": 1,
+      "allowed_feature_ids": ["JEJ_ENDING_UDA", "JEJ_CONNECT_YEONG", "JEJ_POLITE_MARKER"],
+      "hint_ids": ["SONG_KNOWLEDGE_01", "SONG_DIALECT_01", "SONG_BOTH_01", "SYSTEM_RETRY_01"],
+      "fallback_hint_by_verdict": {"retry_knowledge": "SONG_KNOWLEDGE_01", "retry_dialect": "SONG_DIALECT_01", "retry_both": "SONG_BOTH_01", "needs_review": "SONG_BOTH_01", "system_error": "SYSTEM_RETRY_01"}
+    },
+    {
+      "quest_id": "gujwa_gimnyeong_01",
+      "version": "1.0",
+      "location": "동김녕리 해안",
+      "task_type": "compare_cultural_practices",
+      "learning_goal_id": "GIMNYEONG_RITUAL_AND_LABOR",
+      "learning_goal": "잠수굿은 해녀 공동체의 의례이고 멜후림소리는 공동 노동의 노래라는 차이와, 두 문화가 함께 보여주는 안전·풍요·협력의 의미를 설명한다.",
+      "default_question_id": "ritual_and_work_song",
+      "question_variants": [
+        {"id": "ritual_and_work_song", "text": "잠수굿과 멜후림소리가 서로 다르면서도 함께 보여주는 공동체의 마음을 제주어로 설명하세요."},
+        {"id": "difference_and_commonality", "text": "잠수굿과 멜후림소리의 차이와 두 문화가 함께 보여주는 마음을 제주어로 이야기해보세요."},
+        {
+          "id": "practice_group_pull",
+          "text": "마을 사람들에게 함께 모여 멜 그물을 당기자고 제주어로 외쳐보세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "마을 사람들이 함께 모여 멸치 그물을 당기자는 뜻을 자연스럽게 전한다.",
+          "expected_intents": ["사람들이 함께 모임", "멸치 그물을 함께 당김"],
+          "required_concepts": ["여럿이 함께 모이자고 함", "멸치 그물을 당기자고 함"],
+          "optional_concepts": ["힘이나 박자를 맞춤", "공동 노동에 참여하도록 권함"],
+          "forbidden_claims": ["혼자 그물을 당기겠다고 함", "그물을 당기지 말라고 함", "그물을 끊거나 버리라고 함"],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "group_gathering", "forms": ["모영"], "meaning": "모여서", "usage": "여럿이 함께 모이자고 말할 때"},
+            {"id": "anchovy", "forms": ["멜"], "meaning": "멸치", "usage": "멸치 그물 또는 멸치잡이를 말할 때"},
+            {"id": "group_pull_request", "forms": ["당겨봅서"], "meaning": "당겨봅시다/당겨보세요", "usage": "여럿에게 그물을 함께 당기자고 권할 때"}
+          ],
+          "hint_ids": ["GIM_PULL_MEANING", "GIM_PULL_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "GIM_PULL_MEANING", "retry_knowledge": "GIM_PULL_MEANING", "retry_dialect": "GIM_PULL_DIALECT", "needs_review": "GIM_PULL_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        }
+      ],
+      "optional_concepts": ["해녀와 어로 공동체의 생활문화"],
+      "evidence": [
+        {"id": "gimnyeong_01", "fact": "동김녕 잠수굿은 해녀의 안전과 해산물의 풍요를 기원하는 해녀 공동체의 의례다."},
+        {"id": "gimnyeong_02", "fact": "멜후림소리는 멸치 그물을 당길 때 한 사람이 메기고 여러 사람이 받는 어로 노동요다."}
+      ],
+      "required_concepts": ["잠수굿과 노동요의 구분", "안전 또는 풍요", "협력과 공동체"],
+      "forbidden_claims": ["멜후림소리는 잠수굿에서 부르는 의례 노래", "잠수굿은 멸치잡이 노동요"],
+      "minimum_dialect_features": 1,
+      "allowed_feature_ids": ["JEJ_ENDING_UDA", "JEJ_CONNECT_YEONG", "JEJ_LEXICON_BATANG", "JEJ_LEXICON_MEL"],
+      "hint_ids": ["GIM_KNOWLEDGE_01", "GIM_DIALECT_01", "GIM_BOTH_01", "SYSTEM_RETRY_01"],
+      "fallback_hint_by_verdict": {"retry_knowledge": "GIM_KNOWLEDGE_01", "retry_dialect": "GIM_DIALECT_01", "retry_both": "GIM_BOTH_01", "needs_review": "GIM_BOTH_01", "system_error": "SYSTEM_RETRY_01"}
+    },
+    {
+      "quest_id": "gujwa_hado_01",
+      "version": "1.0",
+      "location": "하도리 토끼섬",
+      "task_type": "explain_natural_heritage_meaning",
+      "learning_goal_id": "HADO_CRINUM_HERITAGE",
+      "learning_goal": "토끼섬이라는 이름이 여름철 섬을 하얗게 덮는 문주란 꽃의 모습에서 비롯되었으며, 이곳이 보호해야 할 문주란 자생지이자 천연기념물이라는 의미를 설명한다.",
+      "default_question_id": "crinum_name_and_protection",
+      "question_variants": [
+        {"id": "crinum_name_and_protection", "text": "토끼섬이 그 이름을 얻은 까닭과 문주란 자생지를 지켜야 하는 이유를 제주어로 설명하세요."},
+        {"id": "white_flower_memory", "text": "하도리 토끼섬의 하얀 꽃이 마을의 자연유산으로 기억되어야 하는 이유를 제주어로 이야기해보세요."},
+        {
+          "id": "practice_protection_request",
+          "text": "문주란을 꺾으려는 방문객에게 문주란을 꺾지 말고 소중히 지켜달라고 제주어로 부탁하세요.",
+          "evaluation_type": "situational_intent",
+          "requires_culture_evidence": false,
+          "learning_goal": "문주란을 꺾지 말라는 금지와 자생지를 지켜달라는 보호 요청을 자연스럽게 전한다.",
+          "expected_intents": ["문주란 훼손 금지", "문주란 보호 요청"],
+          "required_concepts": ["문주란을 꺾지 말라고 함", "문주란을 지켜달라고 요청함"],
+          "optional_concepts": ["문주란이 소중함", "멀리서 관찰함"],
+          "forbidden_claims": ["문주란을 꺾어도 된다고 허용함", "문주란을 가져가라고 권함"],
+          "minimum_dialect_features": 0,
+          "required_dialect_groups": [
+            {"id": "protection_prohibition", "forms": ["꺾지 맙서"], "meaning": "꺾지 마세요", "usage": "방문객에게 문주란을 꺾지 말라고 부탁할 때"},
+            {"id": "protection_request", "forms": ["지켜줍서"], "meaning": "지켜주세요", "usage": "방문객에게 문주란을 보호해달라고 부탁할 때"}
+          ],
+          "hint_ids": ["HADO_PROTECTION_MEANING", "HADO_PROTECTION_DIALECT", "SYSTEM_RETRY_01"],
+          "fallback_hint_by_verdict": {"retry_relevance": "HADO_PROTECTION_MEANING", "retry_knowledge": "HADO_PROTECTION_MEANING", "retry_dialect": "HADO_PROTECTION_DIALECT", "needs_review": "HADO_PROTECTION_MEANING", "system_error": "SYSTEM_RETRY_01"}
+        }
+      ],
+      "optional_concepts": ["본래 이름 난들여", "하도리 해안에서 관찰하는 보호 방식"],
+      "evidence": [
+        {"id": "hado_01", "fact": "제주 토끼섬 문주란 자생지는 하도리 산85에 있으며 1962년 천연기념물로 지정되었다."},
+        {"id": "hado_02", "fact": "여름에 하얀 문주란 꽃이 섬을 덮은 모습이 흰 토끼처럼 보여 토끼섬이라는 이름을 얻었다."},
+        {"id": "hado_03", "fact": "보호가 필요한 자생지이므로 해안에서 관찰하며 자연유산의 의미를 배우는 방식이 적절하다."}
+      ],
+      "required_concepts": ["하얀 문주란 꽃과 토끼섬 이름", "문주란 자생지", "천연기념물 보호 또는 보전"],
+      "forbidden_claims": ["토끼가 많이 살아서 토끼섬이라 불린다", "간조 때 누구나 안전하게 걸어서 들어갈 수 있다", "관광을 위해 문주란을 심은 인공 정원이다"],
+      "minimum_dialect_features": 1,
+      "allowed_feature_ids": ["JEJ_ENDING_UDA", "JEJ_CONNECT_YEONG", "JEJ_LEXICON_BATANG", "JEJ_POLITE_MARKER"],
+      "hint_ids": ["HADO_KNOWLEDGE_01", "HADO_DIALECT_01", "HADO_BOTH_01", "SYSTEM_RETRY_01"],
+      "fallback_hint_by_verdict": {"retry_knowledge": "HADO_KNOWLEDGE_01", "retry_dialect": "HADO_DIALECT_01", "retry_both": "HADO_BOTH_01", "needs_review": "HADO_BOTH_01", "system_error": "SYSTEM_RETRY_01"}
+    }
+  ]
+}

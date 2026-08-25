@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0",
+  "records": [
+    {
+      "evidence_id": "songdang_01",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01"],
+      "learning_goal_ids": ["SONGDANG_COMMUNITY_RITE"],
+      "content": "송당 본향당에서는 마을의 안녕을 기원하는 굿과 마을제를 지내며, 한 해에 네 차례 제를 이어간다.",
+      "source": {
+        "title": "송당본향당",
+        "publisher": "제주관광공사 비짓제주",
+        "url": "https://visitjeju.net/kr/detail/view?contentsid=CONT_000000000500376&menuId=DOM_000001718000000000",
+        "accessed_at": "2026-08-23"
+      }
+    },
+    {
+      "evidence_id": "gimnyeong_01",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_gimnyeong_01"],
+      "learning_goal_ids": ["GIMNYEONG_RITUAL_AND_LABOR"],
+      "content": "동김녕 잠수굿은 해녀 공동체가 해녀의 안전과 해산물의 풍요를 기원하는 의례다.",
+      "source": {
+        "title": "동김녕 잠수굿",
+        "publisher": "국립민속박물관 한국민속대백과사전",
+        "url": "https://folkency.nfm.go.kr/api/file/download/dictionary/361",
+        "accessed_at": "2026-08-23"
+      }
+    },
+    {
+      "evidence_id": "gimnyeong_02",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_gimnyeong_01"],
+      "learning_goal_ids": ["GIMNYEONG_RITUAL_AND_LABOR"],
+      "content": "멜후림소리는 김녕리 등에서 여럿이 멸치 그물을 끌어당기는 집단어로와 밀착되어 전해진 노동요다.",
+      "source": {
+        "title": "멸치 후리는 노래",
+        "publisher": "한국학중앙연구원 한국민족문화대백과사전",
+        "url": "https://encykorea.aks.ac.kr/Article/E0018193",
+        "accessed_at": "2026-08-23"
+      }
+    },
+    {
+      "evidence_id": "hado_01",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_hado_01"],
+      "learning_goal_ids": ["HADO_CRINUM_HERITAGE"],
+      "content": "제주 토끼섬 문주란 자생지는 제주시 구좌읍 하도리 산85에 있으며, 문주란이 자연 상태로 자라는 섬의 식생을 보호하기 위해 1962년 천연기념물로 지정되었다.",
+      "source": {
+        "title": "제주 토끼섬 문주란 자생지",
+        "publisher": "국가유산청 국가유산포털",
+        "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1363900190000&pageNo=1_1_2_0",
+        "accessed_at": "2026-08-25"
+      }
+    },
+    {
+      "evidence_id": "hado_02",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_hado_01"],
+      "learning_goal_ids": ["HADO_CRINUM_HERITAGE"],
+      "content": "하도리 굴동포구에서 약 50m 떨어진 작은 섬은 본래 바깥쪽의 작은 섬이라는 뜻으로 난들여라 불렸으며, 여름에 하얀 문주란 꽃이 섬을 덮은 모습이 흰 토끼처럼 보여 토끼섬이라는 이름을 얻었다.",
+      "source": {
+        "title": "토끼섬",
+        "publisher": "제주관광공사 비짓제주",
+        "url": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500652",
+        "accessed_at": "2026-08-25"
+      }
+    },
+    {
+      "evidence_id": "hado_03",
+      "domain": "culture",
+      "version": "1.0",
+      "approved": true,
+      "priority": 95,
+      "quest_ids": ["gujwa_hado_01"],
+      "learning_goal_ids": ["HADO_CRINUM_HERITAGE"],
+      "content": "토끼섬은 보호가 필요한 문주란 자생지이므로 섬에 직접 들어가는 체험보다 하도리 해안에서 관찰하며 자연유산의 의미를 배우는 방식이 안전하고 적절하다.",
+      "source": {
+        "title": "토끼섬",
+        "publisher": "제주관광공사 비짓제주",
+        "url": "https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500652",
+        "accessed_at": "2026-08-25"
+      }
+    },
+    {
+      "evidence_id": "dialect_badang_01",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_hado_01", "gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 교육 자료에서 '바당'은 바다를 가리키는 어휘로 제시된다.",
+      "source": {
+        "title": "제주의 자연 Ⅱ. 제주의 무생물 2. 바다밭 이름",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다",
+        "url": "https://www.jeju.go.kr/jedu/data/data.htm?act=view&category=3096&page=2&seq=1537843",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 출처표시"
+      },
+      "feature_id": "JEJ_LEXICON_BATANG",
+      "forms": ["바당"],
+      "standard_meanings": ["바다"],
+      "usage_contexts": ["제주의 바다와 해안 생활을 말할 때"],
+      "positive_examples": ["제주 바당"]
+    },
+    {
+      "evidence_id": "dialect_mel_01",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 교육 자료의 어패류 핵심어에 '멜'이 제시된다.",
+      "source": {
+        "title": "제주의 자연 Ⅰ. 제주의 생물 2. 어패류",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다",
+        "url": "https://www.jeju.go.kr/jedu/data/data.htm?act=view&category=3101&seq=1537838",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 출처표시"
+      },
+      "feature_id": "JEJ_LEXICON_MEL",
+      "forms": ["멜"],
+      "standard_meanings": ["멸치"],
+      "usage_contexts": ["제주의 어패류와 멸치잡이를 말할 때"],
+      "positive_examples": ["멜"]
+    },
+    {
+      "evidence_id": "dialect_massim_01",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01", "gujwa_hado_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 교육 자료에서 '마씸'이 실제 문장 종결부의 공손한 담화 표현으로 사용된다.",
+      "source": {
+        "title": "제주바당이 최고렌 마씸",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다",
+        "url": "https://www.jeju.go.kr/jedu/data/data.htm?act=view&category=3101&page=11&seq=1538574",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 출처표시"
+      },
+      "feature_id": "JEJ_POLITE_MARKER",
+      "forms": ["마씸"],
+      "standard_meanings": ["공손함을 나타내는 담화 표지"],
+      "usage_contexts": ["상대에게 공손하게 말할 때"],
+      "positive_examples": ["최고렌 마씸"]
+    },
+    {
+      "evidence_id": "dialect_ending_uda_01",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01", "gujwa_hado_01", "gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 구술 자료에서 '-우다' 계열은 공손한 서술 종결 표현으로 실제 사용된다.",
+      "source": {
+        "title": "제주 사난 제줏사름 구술 자료 제5장-5",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다·제주학연구센터",
+        "url": "https://www.jeju.go.kr/jedu/archive/jeju.htm?act=view&seq=551",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 제1유형"
+      },
+      "feature_id": "JEJ_ENDING_UDA",
+      "forms": ["우다"],
+      "standard_meanings": ["공손한 서술 종결"],
+      "usage_contexts": ["상대에게 경험이나 사실을 공손하게 설명할 때"],
+      "positive_examples": ["뒛우다", "엇우다", "가 봣우다"]
+    },
+    {
+      "evidence_id": "dialect_ending_uda_02",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01", "gujwa_hado_01", "gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 구술 자료에서 '-수다' 계열은 공손한 서술 종결 표현으로 실제 사용된다.",
+      "source": {
+        "title": "제주 사난 제줏사름 구술 자료 제2장-4",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다·제주학연구센터",
+        "url": "https://www.jeju.go.kr/jedu/archive/jeju.htm?act=view&seq=519",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 제1유형"
+      },
+      "feature_id": "JEJ_ENDING_UDA",
+      "forms": ["수다"],
+      "standard_meanings": ["공손한 서술 종결"],
+      "usage_contexts": ["상대에게 감사나 사실을 공손하게 설명할 때"],
+      "positive_examples": ["고맙수다"]
+    },
+    {
+      "evidence_id": "dialect_connect_yeong_01",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01", "gujwa_hado_01", "gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 구술 자료에서 '모영'은 표준어 '모여서'에 대응하는 연결 표현으로 실제 사용된다.",
+      "source": {
+        "title": "제주 사난 제줏사름 구술 자료 제6장-8",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다·제주학연구센터",
+        "url": "https://www.jeju.go.kr/jedu/archive/jeju.htm?act=view&seq=563",
+        "accessed_at": "2026-08-23",
+        "license": "공공누리 제1유형"
+      },
+      "feature_id": "JEJ_CONNECT_YEONG",
+      "forms": ["모영"],
+      "standard_meanings": ["모여서"],
+      "usage_contexts": ["행동이나 상태를 연결해 설명할 때"],
+      "positive_examples": ["모영 무시거 헤여?"]
+    },
+    {
+      "evidence_id": "dialect_connect_yeong_02",
+      "domain": "dialect",
+      "version": "1.0",
+      "approved": true,
+      "priority": 100,
+      "quest_ids": ["gujwa_songdang_01", "gujwa_hado_01", "gujwa_gimnyeong_01"],
+      "learning_goal_ids": [],
+      "content": "제주어 마을 구술 자료에서 '허영'은 표준어 '해서'에 대응하는 연결 표현으로 실제 사용된다.",
+      "source": {
+        "title": "성산읍 고성리 들일 구술 자료",
+        "publisher": "제주특별자치도 제주어 교육 플랫폼 페우다·제주학연구센터",
+        "url": "https://www.jeju.go.kr/jedu/map/record.htm?page=179",
+        "accessed_at": "2026-08-23"
+      },
+      "feature_id": "JEJ_CONNECT_YEONG",
+      "forms": ["허영"],
+      "standard_meanings": ["해서"],
+      "usage_contexts": ["행동이나 상태를 연결해 설명할 때"],
+      "positive_examples": ["그 밧거리에 헤영 이런 거시기 허영"]
+    }
+  ]
+}
