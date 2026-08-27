@@ -28,9 +28,9 @@ terraform output
 
 ```powershell
 uv run scripts/attach_data_store_to_engine.py `
-  --project iceu-688 `
+  --project <GCP_PROJECT_ID> `
   --region global `
-  --engine-id gemini-enterprise-17858920_1785892087358 `
+  --engine-id <GEMINI_ENTERPRISE_APP_ID> `
   --data-store-id jeju-neomeo-search-v2-collection_documents
 ```
 

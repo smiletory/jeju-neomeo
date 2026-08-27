@@ -64,7 +64,7 @@ def test_runtime_client_rejects_region_mismatch():
 
 
 def test_runtime_never_proxies_back_to_itself(monkeypatch):
-    monkeypatch.setenv("GOOGLE_CLOUD_AGENT_ENGINE_ID", "8767329798025379840")
+    monkeypatch.setenv("GOOGLE_CLOUD_AGENT_ENGINE_ID", "1234567890123456789")
     monkeypatch.setenv("AGENT_EXECUTION_BACKEND", "agent_runtime")
 
     assert AgentRuntimeEvaluationClient.from_environment() is None

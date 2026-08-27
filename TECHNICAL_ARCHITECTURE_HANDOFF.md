@@ -107,19 +107,19 @@ EVIDENCE_RETRIEVER_BACKEND=agent_platform_search
 
 | 구분 | 현재 값·상태 |
 |---|---|
-| GCP 프로젝트 | `iceu-688` |
+| GCP 프로젝트 | `<GCP_PROJECT_ID>` |
 | Gemini 모델 | `gemini-3.6-flash` |
 | 모델 호출 위치 | `global` |
 | Agent Runtime 위치 | `us-east1` |
-| Agent Runtime | `projects/94900819323/locations/us-east1/reasoningEngines/8767329798025379840` |
+| Agent Runtime | `projects/<PROJECT_NUMBER>/locations/us-east1/reasoningEngines/<AGENT_RUNTIME_ID>` |
 | Runtime 코드명 | `jeju-neomeo-agent` |
 | 배포 방식 | Google Agents CLI / ADK |
 | Search 위치 | `global` |
 | Search collection | `jeju-neomeo-search-v2-collection` |
 | Search data store | `jeju-neomeo-search-v2-collection_documents` |
-| Gemini Enterprise 앱 | 기존 `gemini-enterprise-17858920_1785892087358` 앱 사용 |
+| Gemini Enterprise 앱 | 기존 `<GEMINI_ENTERPRISE_APP_ID>` 앱 사용 |
 | Gemini Enterprise 등록 이름 | `제주너머 문화·제주어 판정 에이전트` |
-| Cloud Run 게임 서버 | 아직 최종 배포 전 |
+| Cloud Run 게임 서버 | 배포 및 종단 검증 완료 후 운영 종료 |
 
 ---
 

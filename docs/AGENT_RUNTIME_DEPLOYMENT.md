@@ -7,7 +7,7 @@
 - 근거 검색: Agent Platform Search 데이터 스토어 (`global`)
 - 등록 대상: 기존 Gemini Enterprise 앱 (`global`)
 - 게임 서버: Cloud Run (`us-east1`)
-- 실제 배포 상태: 배포 완료
+- 배포 이력: 배포 및 종단 검증 완료 후 프로젝트 종료에 따라 운영 종료
 - 배포 드라이런 및 종단 검증: 통과
 - Gemini Enterprise 등록: 기존 앱에 ADK 방식으로 완료
 
@@ -15,17 +15,17 @@
 
 ## 운영 배포 정보
 
-- 공개 게임 URL: <https://jeju-neomeo-game-94900819323.us-east1.run.app>
+- 공개 게임 URL: 프로젝트 종료에 따라 운영 배포 종료
 - Cloud Run 서비스: `jeju-neomeo-game`
 - Cloud Run 리전: `us-east1`
 - 배포 리비전: `jeju-neomeo-game-00002-47m`
-- 컨테이너: `us-east1-docker.pkg.dev/iceu-688/jeju-neomeo/jeju-neomeo-game:20260826-002`
+- 컨테이너: `us-east1-docker.pkg.dev/<GCP_PROJECT_ID>/jeju-neomeo/jeju-neomeo-game:<IMAGE_TAG>`
 - 리소스: 1 vCPU, 2 GiB, 동시성 8, 요청 제한 시간 300초
 - 확장: 최소 인스턴스 0, 최대 인스턴스 3
-- Runtime 리소스 ID: `projects/94900819323/locations/us-east1/reasoningEngines/8767329798025379840`
+- Runtime 리소스 ID: `projects/<PROJECT_NUMBER>/locations/us-east1/reasoningEngines/<AGENT_RUNTIME_ID>`
 - Runtime 모델: `gemini-3.6-flash`
 
-Cloud Run 서비스 계정 `jeju-neomeo-game@iceu-688.iam.gserviceaccount.com`에는 Runtime 호출과 로그 기록에 필요한 최소 역할만 부여했습니다. 공개 브라우저 요청은 Cloud Run까지만 도달하며, 이후 Google Cloud 호출은 서비스 계정의 Application Default Credentials로 인증됩니다.
+Cloud Run 서비스 계정 `jeju-neomeo-game@<GCP_PROJECT_ID>.iam.gserviceaccount.com`에는 Runtime 호출과 로그 기록에 필요한 최소 역할만 부여했습니다. 공개 브라우저 요청은 Cloud Run까지만 도달하며, 이후 Google Cloud 호출은 서비스 계정의 Application Default Credentials로 인증됩니다.
 
 ## 배포 전 확인
 

@@ -89,11 +89,11 @@ node tests/ui_agent_api.mjs
 
 ## 배포 상태
 
-Vertex AI Agent Runtime 배포, Agent Platform Search 검색 권한 연결, 기존 Gemini Enterprise 앱의 ADK 에이전트 등록, 게임 서버의 Cloud Run 배포가 완료됐습니다. 브라우저는 Cloud Run의 `/api/evaluate/stream`만 호출하고, Cloud Run이 인증된 요청으로 Runtime에 판정을 전달하므로 Google 인증정보와 Runtime ID는 브라우저에 노출되지 않습니다.
+Vertex AI Agent Runtime 배포, Agent Platform Search 검색 권한 연결, 기존 Gemini Enterprise 앱의 ADK 에이전트 등록, 게임 서버의 Cloud Run 배포까지 완료해 종단 동작을 검증했습니다. 브라우저는 Cloud Run의 `/api/evaluate/stream`만 호출하고, Cloud Run이 인증된 요청으로 Runtime에 판정을 전달하므로 Google 인증정보와 Runtime ID는 브라우저에 노출되지 않습니다.
 
-- 게임 URL: <https://jeju-neomeo-game-94900819323.us-east1.run.app>
-- Agent Runtime: `us-east1`, 기존 Runtime ID 유지
-- Cloud Run: `us-east1`, 최소 인스턴스 0·최대 3
+- 라이브 데모: 프로젝트 종료에 따라 운영 배포 종료(소스 코드와 발표 자료만 보존)
+- Agent Runtime 검증 리전: `us-east1`
+- Cloud Run 검증 설정: `us-east1`, 최소 인스턴스 0·최대 3
 - Agent Designer: 사용하지 않음
 
 자세한 구조와 재배포 정보는 `docs/AGENT_RUNTIME_DEPLOYMENT.md`를 참고하세요.

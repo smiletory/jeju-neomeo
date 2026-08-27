@@ -645,11 +645,11 @@ Agent Platform Search 결과를 그대로 진실로 신뢰하지 않는다. 원�
 
 ### 현재 완료된 것
 
-- GCP 프로젝트: `iceu-688`
+- GCP 프로젝트: `<GCP_PROJECT_ID>`
 - Vertex AI Agent Runtime 배포 완료
 - Runtime 리전: `us-east1`
 - Runtime 리소스:
-  - `projects/94900819323/locations/us-east1/reasoningEngines/8767329798025379840`
+  - `projects/<PROJECT_NUMBER>/locations/us-east1/reasoningEngines/<AGENT_RUNTIME_ID>`
 - Agent Platform Search 데이터 스토어 연결
 - 기존 Gemini Enterprise 앱에 ADK 에이전트 등록
 - 등록 표시 이름: `제주너머 문화·제주어 판정 에이전트`
@@ -657,7 +657,7 @@ Agent Platform Search 결과를 그대로 진실로 신뢰하지 않는다. 원�
 
 ### Gemini Enterprise 앱
 
-- 기존 앱 ID: `gemini-enterprise-17858920_1785892087358`
+- 기존 앱 ID: `<GEMINI_ENTERPRISE_APP_ID>`
 - 별도로 만들었던 `제주너머 공식 근거 검색` Search 앱은 삭제됨
 - 데이터 스토어는 기존 Gemini Enterprise 앱과 연결
 - Agent Runtime의 ADK 에이전트도 기존 Gemini Enterprise 앱에 등록
