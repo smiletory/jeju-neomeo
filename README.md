@@ -1,104 +1,139 @@
 # 제주너머
 
-제주 마을의 고유 문화와 제주어를 게임 안에서 배우며 설문대 할망의 기억을 되찾는 데스크톱 2D 어드벤처 데모입니다. 구좌읍의 세 지점을 완주하면 기억 조각 1개를 얻고 다음 지역이 해금됩니다. 전체 기억은 14개 탐험 권역의 조각 14개로 완성됩니다.
+제주 관광의 획일화 속에서 가려진 마을별 문화와 이야기를 게임으로 탐험하고, 제주어 상호작용을 통해 지역 정체성을 몰입감 있게 체험하는 데스크톱 2D 어드벤처 데모입니다.
 
-## 팀 구성
+플레이어는 설문대 할망의 잃어버린 기억을 찾아 제주 14개 탐험 권역을 여행합니다. 데모에서는 구좌읍의 송당리 본향당, 하도리 토끼섬, 동김녕리 해안을 구현했으며 세 지점을 완주하면 기억 조각 `구좌의 바람`을 획득합니다.
 
-- 개발 및 AI 에이전트 구현: smiletory
-- 서비스 기획 및 시나리오 구성: alex14641234-droi
+> 제주어 입력은 문법 암기를 위한 별도 학습 기능이 아니라, 지역 NPC와 대화하며 제주의 언어와 생활문화를 직접 체험하게 하는 몰입 장치입니다.
 
-## 구현된 데모
+## 화면
 
-- 제주 14개 탐험 권역 지도와 구좌읍 확대 탐험 지도
-- 진행 NPC `바람새`와 서로 다른 미션 NPC 3명
+### 제주 14개 탐험 권역
+
+![제주 전체 탐험 지도](docs/images/jeju-world-map.png)
+
+### 구좌읍 문화 지점
+
+![구좌읍 탐험 지도](docs/images/gujwa-exploration-map.png)
+
+### 제주어 상호작용과 Gemini 판정
+
+![하도리 제주어 대화 입력](docs/images/gemini-dialogue-evaluation.png)
+
+## 구현 범위
+
+- 제주 14개 탐험 권역 지도와 구좌읍 확대 지도
+- 진행 NPC `바람새`와 지점별 미션 NPC
 - 송당리 본향당 → 하도리 토끼섬 → 동김녕리 해안 순차 퀘스트
-- 실제 Vertex AI `gemini-3.6-flash` 기반 3-에이전트 판정
-- 문장 의미 판정 → 의미 통과 시 제주어 표현 판정 → 신뢰성 검증 → 결정론적 최종 게이트
-- 세 기억의 흔적 결합 → `구좌의 바람` 기억 조각 `1/14` → 조천읍 해금
-- 제주 민화·판화와 한지 질감의 무음 데스크톱 UI
+- 대화형 장면 전환, 상세정보, 미니게임, 지점별 기억의 흔적 보상
+- 제주 민화·판화와 한지 질감 기반의 무음 데스크톱 UI
+- 실제 Vertex AI `gemini-3.6-flash` 기반 ADK 다중 에이전트 판정
+- 세 기억의 흔적 결합 → 기억 조각 `구좌의 바람` `1/14` → 조천읍 해금
 
-## 실행
+## AI 판정 구조
 
-필수 환경은 Python/uv, Google Cloud CLI, Vertex AI 권한입니다.
+```text
+플레이어 답변
+  → 입력 보호: 명백한 프롬프트 공격 사전 차단
+  → 승인된 제주어 표현·용례 검색
+  → ADK SequentialAgent
+       1. Meaning Judge: 문장 전체 의미와 현재 대화 상황의 적합성 판정
+       2. Dialect Judge: 의미 통과 시 제주어 표현과 문맥상 쓰임 판정
+       3. Reliability Verifier: 근거·상충·조작 시도 교차 검증
+  → Deterministic Gate: 통과·재시도·검토·시스템 오류 확정
+  → 단계별 결과 스트리밍
+```
+
+모델의 한 번의 응답이 퀘스트 통과를 직접 결정하지 않습니다. 루브릭에 없는 근거 ID, 허용되지 않은 힌트 ID, 에이전트 결과 상충, 낮은 신뢰도는 결정론적 게이트에서 진행을 차단합니다. 사용자 입력은 프롬프트가 아니라 신뢰하지 않는 인용 데이터로 전달됩니다.
+
+브라우저 UI는 `web/agent-api.js`를 통해 `questId`, `questionId`, 답변과 시도 횟수만 전송합니다. 판정 기준은 서버에 있으므로 장면이나 UI를 변경해도 에이전트 계약을 재사용할 수 있습니다.
+
+자세한 구성은 [기술 아키텍처](docs/ARCHITECTURE.md)를 참고하세요.
+
+## 로컬 실행
+
+### 요구 사항
+
+- Python 3.11 이상
+- [uv](https://docs.astral.sh/uv/)
+- Google Cloud CLI
+- Vertex AI를 호출할 수 있는 개인 또는 팀 GCP 프로젝트
 
 ```powershell
-agents-cli install
+uv sync
+Copy-Item .env.example .env
 gcloud auth application-default login
 uv run uvicorn app.local_game_server:app --host 127.0.0.1 --port 8000
 ```
 
-브라우저에서 `http://127.0.0.1:8000`을 엽니다. Windows에서는 `start-demo.ps1`을 실행해도 됩니다.
+브라우저에서 `http://127.0.0.1:8000`을 열거나 Windows에서 `start-demo.ps1`을 실행합니다.
 
-`.env`의 필수 값:
+필수 환경 변수:
 
 ```dotenv
 GOOGLE_GENAI_USE_VERTEXAI=true
 GOOGLE_CLOUD_PROJECT=<GCP_PROJECT_ID>
 GOOGLE_CLOUD_LOCATION=global
+EVIDENCE_RETRIEVER_BACKEND=local_json
 ```
 
-## 판정 구조
+`local_json`은 저장소의 승인 레지스트리를 사용합니다. 관리형 Agent Platform Search를 다시 구성하려면 [검색 인프라 안내](docs/AGENT_SEARCH_SETUP.md)를 참고하세요.
 
-```text
-플레이어 답변
-  ├─ 입력 경계: 명백한 프롬프트 공격 차단
-  ├─ 근거 검색: 승인된 문화 자료·제주어 용례만 조회
-  └─ ADK SequentialAgent
-       ├─ Meaning Judge: 문장 전체 의미와 현재 대화 상황의 적합성 판정
-       ├─ 의미 통과 시 Dialect Judge: 허용된 제주어 특징과 문맥상 쓰임 판정
-       └─ 의미 실패 시 제주어 판정 생략
-          ↓
-     Reliability Verifier: 근거·상충·조작 시도 교차 검증
-          ↓
-     Deterministic Gate: 통과/재시도/검토/시스템 오류 확정
-```
-
-모델은 최종 통과 여부를 직접 결정할 수 없습니다. 루브릭에 없는 근거 ID, 허용되지 않은 힌트 ID, 에이전트 상충, 낮은 신뢰도는 진행을 막습니다. 모든 사용자 입력은 신뢰하지 않는 인용 데이터로 취급됩니다.
-
-## 게임 UI 연결
-
-`web/agent-api.js`가 화면과 판정 API 사이의 계약을 담당합니다. 퀘스트 화면은 `questId`, `questionId`, 사용자 답변, 시도 횟수만 전달하며 문화·제주어 판정 로직을 포함하지 않습니다. UI 디자인이나 장면 구성이 바뀌어도 이 클라이언트를 재사용하면 에이전트 코드는 수정할 필요가 없습니다.
-
-판정 결과 화면에는 문화 지식 피드백, 제주어 표현 피드백, 승인된 근거 ID와 검색 백엔드가 분리 표시됩니다. 명백한 프롬프트 공격은 Gemini 호출 전에 입력 보호 계층에서 차단됐다는 사실도 표시합니다.
-
-## 관리형 근거 검색
-
-기본 데모는 `local_json` 근거 검색을 사용합니다. `agent_platform_search` 어댑터도 구현되어 있어 커넥터가 만든 collection과 data store ID를 설정하면 코드 변경 없이 관리형 검색으로 전환할 수 있습니다.
-
-```dotenv
-EVIDENCE_RETRIEVER_BACKEND=agent_platform_search
-DATA_STORE_REGION=global
-DATA_STORE_COLLECTION=<COLLECTION_ID>
-DATA_STORE_ID=<DATA_STORE_ID>
-```
-
-Agent Platform Search는 후보 근거 ID만 찾습니다. 실제 내용과 승인 여부는 로컬 승인 레지스트리에서 다시 검증하므로 원격 인덱스에 없는 ID, 미승인 자료, 다른 퀘스트 자료는 에이전트에 전달되지 않습니다. 자세한 준비 절차는 `docs/AGENT_SEARCH_SETUP.md`를 참고하세요.
-
-## 테스트
+## 테스트와 평가
 
 ```powershell
 uv run pytest tests/unit -q
 node tests/ui_agent_api.mjs
+uv run ruff check app tests scripts infra/agent_search/scripts
 ```
 
-현재 전체 단위 테스트 75개와 UI API 계약 검사가 통과합니다. 하도리·동김녕리 실제 게임 문장 6건은 `agents-cli eval run`에서 모두 유효하게 처리됐고 응답 품질 평균 5.0/5.0을 기록했습니다. 배포된 Runtime과 Cloud Run을 통해 정상 제주어, 표준어, 의미 오류 답안의 종단 판정도 확인했습니다.
+- 단위 테스트: 74개 통과
+- UI API 계약 테스트 통과
+- 하도리·동김녕리 릴리스 평가: 6/6 유효, 응답 품질 평균 5.0/5.0
+- 정상 제주어, 표준어, 의미가 반대인 제주어 입력의 종단 판정 검증
 
-## 발표 시연
+최종 평가 기준과 보존 산출물은 [평가 보고서](docs/EVALUATION.md)에 정리되어 있습니다. GitHub Actions도 동일한 단위 테스트와 계약 검사를 수행합니다.
 
-각 퀘스트의 `발표용 답안 불러오기`는 답변만 채웁니다. 판정을 우회하지 않으며 반드시 실제 Gemini 3-에이전트 호출을 거칩니다. 상세 10분 동선은 `docs/DEMO_SCRIPT.md`를 참고하세요.
+## 배포 기록
 
-## 배포 상태
+프로젝트 진행 중 다음 구성을 실제로 배포해 종단 동작을 검증했습니다.
 
-Vertex AI Agent Runtime 배포, Agent Platform Search 검색 권한 연결, 기존 Gemini Enterprise 앱의 ADK 에이전트 등록, 게임 서버의 Cloud Run 배포까지 완료해 종단 동작을 검증했습니다. 브라우저는 Cloud Run의 `/api/evaluate/stream`만 호출하고, Cloud Run이 인증된 요청으로 Runtime에 판정을 전달하므로 Google 인증정보와 Runtime ID는 브라우저에 노출되지 않습니다.
+- 게임 웹·FastAPI 프록시: Cloud Run
+- 다중 에이전트: Vertex AI Agent Runtime
+- 근거 검색: Agent Platform Search
+- 에이전트 등록: Gemini Enterprise
+- 관측: Cloud Logging·Trace
 
-- 라이브 데모: 프로젝트 종료에 따라 운영 배포 종료(소스 코드와 발표 자료만 보존)
-- Agent Runtime 검증 리전: `us-east1`
-- Cloud Run 검증 설정: `us-east1`, 최소 인스턴스 0·최대 3
-- Agent Designer: 사용하지 않음
+프로젝트 종료 후 과금되는 실행 리소스와 라이브 데모는 제거했습니다. 저장소의 Docker, Cloud Build, Terraform과 배포 문서는 재현 및 포트폴리오 자료로 보존합니다. 자세한 내용은 [배포 기록](docs/AGENT_RUNTIME_DEPLOYMENT.md)을 참고하세요.
 
-자세한 구조와 재배포 정보는 `docs/AGENT_RUNTIME_DEPLOYMENT.md`를 참고하세요.
+## 지도 데이터 재생성
 
-## 지도 경계 데이터
+실행에 필요한 축약 지도는 `web/jeju-map-data.js`에 포함되어 있습니다. 약 33MB의 원본 GeoJSON은 저장소 용량과 재배포 권리 관리를 위해 포함하지 않습니다.
 
-제주 전체 지도는 통계청 SGIS 행정동 경계를 기반으로 보정된 `vuski/admdongkor`의 2026-07-01 GeoJSON을 사용합니다. 원자료는 공공누리 제1유형, 가공 경계 데이터는 CC BY 4.0입니다. 지도는 7읍·5면·`제주 열아홉 동네`·`서귀포 열두 동네`의 14개 탐험 권역으로 구성하며, 본섬에서 떨어진 추자면은 별도 삽입 지도로 표시합니다.
+`vuski/admdongkor`의 2026-07-01 행정동 GeoJSON을 별도로 내려받은 뒤 다음 명령으로 지도를 재생성할 수 있습니다.
 
+```powershell
+uv run python scripts/build_jeju_eup_map.py `
+  --source C:\path\to\HangJeongDong_ver20260701.geojson
+```
+
+데이터와 문화 자료의 출처는 [자료 출처 및 권리 안내](docs/SOURCES_AND_ATTRIBUTION.md)에 정리되어 있습니다.
+
+## 팀 구성
+
+- 개발·게임 UI·AI 에이전트·GCP 인프라: [smiletory](https://github.com/smiletory)
+- 서비스 기획·문화 조사·시나리오 구성: [alex14641234-droi](https://github.com/alex14641234-droi)
+
+## 문서
+
+- [기술 아키텍처](docs/ARCHITECTURE.md)
+- [평가 보고서](docs/EVALUATION.md)
+- [Agent Runtime 배포 기록](docs/AGENT_RUNTIME_DEPLOYMENT.md)
+- [Agent Platform Search 구성](docs/AGENT_SEARCH_SETUP.md)
+- [하도리 토끼섬 시나리오](docs/HADO_SCENARIO.md)
+- [발표 시연 동선](docs/DEMO_SCRIPT.md)
+- [자료 출처 및 권리 안내](docs/SOURCES_AND_ATTRIBUTION.md)
+
+## 이용 안내
+
+현재 저장소에는 별도의 오픈소스 라이선스가 지정되어 있지 않습니다. 코드 재사용 범위를 정하려면 팀원 합의 후 코드 라이선스를 추가해야 합니다. 외부 지도 데이터와 문화 자료, 이미지 에셋은 각각의 출처와 권리 조건을 따릅니다.

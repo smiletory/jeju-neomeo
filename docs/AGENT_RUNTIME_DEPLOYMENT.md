@@ -1,6 +1,6 @@
-# Agent Runtime 배포 및 Gemini Enterprise 등록
+# Agent Runtime 배포 기록 및 재현 안내
 
-## 현재 상태
+## 최종 검증 구성
 
 - 배포 대상: Vertex AI Agent Runtime (`us-east1`)
 - 모델 호출 위치: Vertex AI Gemini (`global`)
@@ -13,12 +13,13 @@
 
 게임 UI는 동일 출처의 `/api/evaluate` 및 `/api/evaluate/stream` 계약만 사용합니다. 로컬 개발에서는 FastAPI 서버가, 운영에서는 Cloud Run이 인증된 요청으로 Agent Runtime에 전달합니다. Runtime에서는 문장 의미 판정, 의미 통과 시 제주어 표현 판정, 신뢰성 검증 순으로 실행됩니다. 브라우저에는 Google 인증정보나 Runtime ID를 노출하지 않습니다. 퀘스트 화면이 바뀌어도 API 계약을 유지하면 에이전트 코드를 다시 만들 필요가 없습니다.
 
-## 운영 배포 정보
+현재 Cloud Run, Agent Runtime, Agent Platform Search, Gemini Enterprise 등록과 데이터 버킷은 학교 프로젝트의 과금·계정 연결을 정리하기 위해 제거했습니다. 아래 내용은 검증 당시의 배포 사양과 별도 GCP 프로젝트에서 재현할 때 참고할 기록입니다.
+
+## 검증 당시 배포 사양
 
 - 공개 게임 URL: 프로젝트 종료에 따라 운영 배포 종료
 - Cloud Run 서비스: `jeju-neomeo-game`
 - Cloud Run 리전: `us-east1`
-- 배포 리비전: `jeju-neomeo-game-00002-47m`
 - 컨테이너: `us-east1-docker.pkg.dev/<GCP_PROJECT_ID>/jeju-neomeo/jeju-neomeo-game:<IMAGE_TAG>`
 - 리소스: 1 vCPU, 2 GiB, 동시성 8, 요청 제한 시간 300초
 - 확장: 최소 인스턴스 0, 최대 인스턴스 3
@@ -65,7 +66,7 @@ AGENT_EXECUTION_BACKEND=local
 
 ## 완료된 릴리스 검증
 
-- 단위 테스트: `75 passed`
+- 단위 테스트: `74 passed`
 - UI API 계약: 통과
 - 릴리스 평가 데이터: 하도리 3건 + 동김녕리 3건
 - `agents-cli eval run`: 6/6 유효, 오류 0, 응답 품질 평균 5.0/5.0
@@ -94,4 +95,4 @@ agents-cli publish gemini-enterprise `
 
 ## 데이터 스토어 검색 원칙
 
-현재 문화 자료 검색은 별도 Search 앱을 거치지 않고 데이터 스토어의 serving config를 직접 호출합니다. 중복으로 생성됐던 `jeju-neomeo-search-app`은 2026-08-24에 삭제했습니다. 같은 날 자동 동기화의 문서 ID 설정을 바로잡기 위해 데이터 스토어를 `jeju-neomeo-search-v2-collection_documents`로 교체했으며, GCS 승인 문서와 Runtime·Gemini Enterprise 등록 구조는 유지합니다.
+검증 당시 문화 자료 검색은 별도 Search 앱을 거치지 않고 데이터 스토어의 serving config를 직접 호출했습니다. 관리형 검색은 후보 근거 ID만 반환하고, 서버가 `app/data/evidence.json`의 승인 여부·버전·퀘스트 범위를 다시 검사했습니다. 프로젝트 종료 후 원격 데이터 스토어와 GCS 문서는 삭제했으며 승인 레지스트리와 Terraform만 저장소에 보존합니다.

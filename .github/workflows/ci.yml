@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv sync --extra lint
+
+      - name: Run Ruff
+        run: uv run ruff check app tests scripts infra/agent_search/scripts
+
+      - name: Run type checks
+        run: uv run ty check app
+
+      - name: Run spelling checks
+        run: uv run codespell README.md docs app tests scripts infra pyproject.toml
+
+      - name: Run unit tests
+        run: uv run pytest tests/unit -q
+
+      - name: Run browser API contract test
+        run: node tests/ui_agent_api.mjs

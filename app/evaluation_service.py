@@ -16,8 +16,8 @@ from app.decision import parse_state_model, resolve_decision
 from app.dialect_quality import enforce_dialect_quality
 from app.guard import detect_prompt_attack
 from app.rubrics import (
-    get_evidence_retriever,
     get_effective_rubric,
+    get_evidence_retriever,
     get_question_variant,
     get_rubric,
     load_hints,

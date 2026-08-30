@@ -55,6 +55,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+tests/*.png
 
 # Translations
 *.mo
@@ -212,6 +213,12 @@ my_env.tfvars
 .google-agents-cli/
 deployment_metadata.json
 artifacts/traces/
+artifacts/grade_results/**/*.html
+artifacts/grade_results/**/*.json
+!artifacts/grade_results/release_hado_gimnyeong/
+!artifacts/grade_results/release_hado_gimnyeong/results_20260826_003155.json
+artifacts/eval_inputs/*.json
+!artifacts/eval_inputs/release_hado_gimnyeong.json
 
 # A2A Inspector
 tools/a2a-inspector/

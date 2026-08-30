@@ -7,14 +7,14 @@ enough to ship with the desktop demo.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 from itertools import pairwise
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "web" / "assets" / "HangJeongDong_ver20260701.geojson"
-OUTPUT = ROOT / "web" / "jeju-map-data.js"
+DEFAULT_OUTPUT = ROOT / "web" / "jeju-map-data.js"
 
 RURAL_BY_CODE = {
     "5011025000": ("hallim", "한림읍", "eup"),
@@ -201,8 +201,27 @@ def make_project(features, width, height, padding, offset_x=0, offset_y=0):
     return project
 
 
-def main():
-    with SOURCE.open(encoding="utf-8") as source_file:
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build the compact 14-region Jeju map used by the web demo."
+    )
+    parser.add_argument(
+        "--source",
+        type=Path,
+        required=True,
+        help="Path to the admdongkor 2026-07-01 GeoJSON source file.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT,
+        help=f"Output JavaScript path (default: {DEFAULT_OUTPUT}).",
+    )
+    return parser.parse_args()
+
+
+def main(source_path: Path, output_path: Path):
+    with source_path.open(encoding="utf-8") as source_file:
         collection = json.load(source_file)
 
     all_jeju_features = [
@@ -320,12 +339,14 @@ def main():
             }
         ],
     }
-    OUTPUT.write_text(
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
         "window.JEJU_MAP_DATA=" + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n",
         encoding="utf-8",
     )
-    print(f"wrote {OUTPUT} ({OUTPUT.stat().st_size:,} bytes)")
+    print(f"wrote {output_path} ({output_path.stat().st_size:,} bytes)")
 
 
 if __name__ == "__main__":
-    main()
+    args = parse_args()
+    main(args.source, args.output)

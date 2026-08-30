@@ -13,8 +13,8 @@ from google.genai import types
 from app.agent import app as agent_app
 from app.decision import parse_state_model, resolve_decision
 from app.rubrics import (
-    get_question_variant,
     get_effective_rubric,
+    get_question_variant,
     get_rubric,
     load_hints,
     make_evaluation_envelope,

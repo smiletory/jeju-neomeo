@@ -1,8 +1,10 @@
 # Agent Platform Search 연결 준비
 
-## 현재 상태
+## 보존 상태
 
-코드에는 `local_json`과 `agent_platform_search` 두 검색 백엔드가 구현되어 있다. 2026-08-25 기준 GCP 관리형 데이터 스토어와 검색 앱 생성, 승인 문서 13개 수집, 실제 검색 및 게임 API 종단간 검증까지 완료했다. 현재 로컬 `.env`는 `agent_platform_search`를 사용한다. 구좌읍 두 번째 지점은 하도리 토끼섬으로 교체했으며 `hado_01`~`hado_03`이 국가유산청 국가유산포털과 제주관광공사 비짓제주 자료를 근거로 제공된다.
+코드에는 `local_json`과 `agent_platform_search` 두 검색 백엔드가 구현되어 있습니다. 프로젝트 진행 중 GCP 관리형 데이터 스토어 생성, 승인 문서 13개 수집, 실제 검색과 게임 API 종단 검증을 완료했습니다. 프로젝트 종료 후 과금·학교 계정 연결 리소스와 버킷은 삭제했으므로 현재 기본 재현 경로는 `local_json`입니다.
+
+관리형 검색을 다시 사용하려면 별도 GCP 프로젝트에서 이 문서와 `infra/agent_search/`의 Terraform을 이용해 새 데이터 스토어를 만들어야 합니다. 과거 리소스 ID를 재사용하지 않습니다. 하도리 토끼섬 근거 `hado_01`~`hado_03`을 포함한 승인 레지스트리는 `app/data/evidence.json`에 남아 있습니다.
 
 관리형 검색은 근거의 최종 진실 저장소가 아니다. Search는 후보 `evidence_id`만 찾고, 서버가 `app/data/evidence.json`의 승인 여부·버전·퀘스트·학습 목표·제주어 특징 허용 목록을 다시 검증한다. 원격 인덱스가 알 수 없는 ID나 다른 퀘스트의 자료를 반환하면 결과에서 제거된다.
 
@@ -83,7 +85,7 @@ $projectId = ($projectLine -split '=', 2)[1].Trim()
 uv run infra/agent_search/scripts/start_connector_run.py `
   --project $projectId `
   --region global `
-  --collection-id jeju-neomeo-search-v2-collection `
+  --collection-id <TERRAFORM_OUTPUT_COLLECTION> `
   --wait
 ```
 
